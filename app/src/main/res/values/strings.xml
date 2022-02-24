@@ -11,4 +11,10 @@
     <string name="what_to_do">What would you like to do?</string>
     <string name="view_order">View recent orders</string>
     <string name="make_order">Place an order</string>
+    <string name="camposVacios">Inputs cannot be empty</string>
+    <string name="invalidCredentials">Username or password incorrect</string>
+    <string name="userExist">This user already exists</string>
+    <string name="userCreated">User created successfully</string>
+    <string name="logout">Successfully logged out</string>
+    <string name="btn_logout">LogOut</string>
 </resources>

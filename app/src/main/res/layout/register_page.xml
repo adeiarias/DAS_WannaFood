@@ -9,6 +9,7 @@
         android:id="@+id/btn_register"
         android:layout_width="130dp"
         android:layout_height="45dp"
+        android:onClick="onRegister"
         android:text="@string/btn_register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
