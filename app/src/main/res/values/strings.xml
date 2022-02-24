@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">DAS_WannaFood</string>
+    <string name="main_title">WannaFood</string>
+    <string name="login_text">LogIn</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_register_login">SignUp</string>
+    <string name="register_label_login">Create an account</string>
+    <string name="register_text">Register</string>
+    <string name="btn_register">SignUp</string>
+    <string name="welcome_text">Welcome:</string>
+    <string name="what_to_do">What would you like to do?</string>
+    <string name="view_order">View recent orders</string>
+    <string name="make_order">Place an order</string>
 </resources>

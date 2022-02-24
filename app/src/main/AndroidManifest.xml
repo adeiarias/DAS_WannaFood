@@ -10,7 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DAS_WannaFood">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
