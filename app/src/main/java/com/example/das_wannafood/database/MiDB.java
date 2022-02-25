@@ -8,7 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.das_wannafood.models.Restaurant;
 import com.example.das_wannafood.models.User;
+
+import java.util.ArrayList;
 
 public class MiDB extends SQLiteOpenHelper {
 
@@ -20,6 +23,10 @@ public class MiDB extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         // Creación de la tabla de los usuarios
         sqLiteDatabase.execSQL("create table users('id' integer primary key autoincrement not null, 'username' varchar(255) not null, 'email' varchar(255) not null, 'password' varchar(255) not null)");
+        sqLiteDatabase.execSQL("create table restaurants('id' integer primary key autoincrement not null, 'name' varchar(255) not null, 'image_path' varchar(255) not null, 'city' varchar(255) not null)");
+
+        sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Tagliatella\", \"tagliatella\", \"bilbao\")");
+        sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Burger King\", \"burger\", \"bilbao\")");
     }
 
     @Override
@@ -55,5 +62,16 @@ public class MiDB extends SQLiteOpenHelper {
         } else {
             return new User(username);
         }
+    }
+
+    // Conseguir todos los restaurantes (nombre, path de la imagen y su ciudad)
+    public ArrayList<Restaurant> getRestaurantList(String city) {
+        ArrayList<Restaurant> list = new ArrayList<Restaurant>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("Select name,image_path,city from restaurants where city='" + city + "'", null);
+        while(c.moveToNext()) {
+            list.add(new Restaurant(c.getString(0), c.getString(1), c.getString(2)));
+        }
+        return list;
     }
 }

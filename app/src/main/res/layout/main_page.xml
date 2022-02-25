@@ -50,6 +50,7 @@
         android:layout_width="184dp"
         android:layout_height="57dp"
         android:layout_marginTop="44dp"
+        android:onClick="view_orders"
         android:text="@string/view_order"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -57,9 +58,10 @@
         app:layout_constraintTop_toBottomOf="@+id/what_to_do" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/place_order"
         android:layout_width="182dp"
         android:layout_height="56dp"
+        android:onClick="place_order"
         android:text="@string/make_order"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -10,13 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DAS_WannaFood">
         <activity
+            android:name=".activities.ViewOrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.PlaceOrderActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" />
+        <activity
             android:name=".activities.MainPageActivity"
             android:exported="false" />
         <activity
             android:name=".activities.RegisterActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".activities.LoginActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

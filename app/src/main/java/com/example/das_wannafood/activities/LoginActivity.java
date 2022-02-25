@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -36,18 +37,18 @@ public class LoginActivity extends AppCompatActivity {
         // Los campos del login no pueden estar vacios
         if(username.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, getString(R.string.camposVacios), Toast.LENGTH_SHORT).show();
-        }
+        } else {
+            User user = db.login(username, password);
 
-        User user = db.login(username, password);
-
-        // Credenciales incorrectas
-        if(user == null) {
-            Toast.makeText(this, getString(R.string.invalidCredentials), Toast.LENGTH_SHORT).show();
-        } else { // Credenciales correctas, pasar a la siguiente actividad
-            Intent intent = new Intent(this, MainPageActivity.class);
-            intent.putExtra("username", user.getUsername());
-            startActivity(intent);
-            finish();
+            // Credenciales incorrectas
+            if(user == null) {
+                Toast.makeText(this, getString(R.string.invalidCredentials), Toast.LENGTH_SHORT).show();
+            } else { // Credenciales correctas, pasar a la siguiente actividad
+                Intent intent = new Intent(this, MainPageActivity.class);
+                intent.putExtra("username", user.getUsername());
+                startActivity(intent);
+                finish();
+            }
         }
     }
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -37,15 +38,15 @@ public class RegisterActivity extends AppCompatActivity {
         // Los campos del registro no pueden estar vacios
         if(username.isEmpty() || password.isEmpty() || email.isEmpty()) {
             Toast.makeText(this, getString(R.string.camposVacios), Toast.LENGTH_SHORT).show();
-        }
-
-        // Comprobar que el usuario no existe
-        if(db.userExist(username)) {
-            Toast.makeText(this, getString(R.string.userExist), Toast.LENGTH_SHORT).show();
         } else {
-            db.insertUser(username, email, password);
-            Toast.makeText(this, getString(R.string.userCreated), Toast.LENGTH_SHORT).show();
-            finish();
+            // Comprobar que el usuario no existe
+            if(db.userExist(username)) {
+                Toast.makeText(this, getString(R.string.userExist), Toast.LENGTH_SHORT).show();
+            } else {
+                db.insertUser(username, email, password);
+                Toast.makeText(this, getString(R.string.userCreated), Toast.LENGTH_SHORT).show();
+                finish();
+            }
         }
     }
 }
