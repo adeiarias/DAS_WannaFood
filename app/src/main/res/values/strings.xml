@@ -19,9 +19,13 @@
     <string name="btn_logout">LogOut</string>
     <string name="place_order_title">Place an order</string>
     <string name="btn_city_search">Search</string>
-    <string name="noresturants">There aren\'t restaurant in that city</string>
+    <string name="noresturants">There aren\'t restaurants in that city</string>
     <string name="view_orders_title">View orders</string>
     <string name="orders_text">Orders</string>
     <string name="antiguos">Previous Orders</string>
     <string name="actual">Actual Order</string>
+    <string name="delete_order_btn">Delete Order</string>
+    <string name="finish_order_btn">Finish Order</string>
+    <string name="previous_orders_text">Previous Orders</string>
+    <string name="btn_prefs">Preferences</string>
 </resources>

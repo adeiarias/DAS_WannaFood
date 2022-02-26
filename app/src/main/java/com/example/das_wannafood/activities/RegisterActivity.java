@@ -13,10 +13,10 @@ import com.example.das_wannafood.database.MiDB;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText user_text;
-    EditText pass_text;
-    EditText email_text;
-    MiDB db;
+    private EditText user_text;
+    private EditText pass_text;
+    private EditText email_text;
+    private MiDB db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

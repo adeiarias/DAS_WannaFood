@@ -12,7 +12,7 @@ import com.example.das_wannafood.R;
 
 public class MainPageActivity extends AppCompatActivity {
 
-    TextView current_user;
+    private TextView current_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,10 @@ public class MainPageActivity extends AppCompatActivity {
         Toast.makeText(this, getString(R.string.logout), Toast.LENGTH_SHORT).show();
         startActivity(intent);
         finish();
+    }
+
+    public void onPrefs(View v) {
+
     }
 
     // Ir a la actividad de pedir comida

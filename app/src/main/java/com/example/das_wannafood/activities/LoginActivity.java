@@ -15,9 +15,9 @@ import com.example.das_wannafood.models.User;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText user_text;
-    EditText pass_text;
-    MiDB db;
+    private EditText user_text;
+    private EditText pass_text;
+    private MiDB db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

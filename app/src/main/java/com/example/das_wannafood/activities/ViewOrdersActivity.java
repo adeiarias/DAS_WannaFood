@@ -20,11 +20,13 @@ public class ViewOrdersActivity extends AppCompatActivity {
 
     // Ir a la actividad de pedir comida
     public void pedidoActual(View v) {
-
+        Intent intent = new Intent(this, ActualOrderActivity.class);
+        startActivity(intent);
     }
 
     // Ir a la actividad de mirar los pedidos
     public void antiguosPedidos(View v) {
-
+        Intent intent = new Intent(this, PreviousOrderActivity.class);
+        startActivity(intent);
     }
 }

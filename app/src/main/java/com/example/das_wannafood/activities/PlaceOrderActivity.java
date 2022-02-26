@@ -2,6 +2,7 @@ package com.example.das_wannafood.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -39,14 +40,16 @@ public class PlaceOrderActivity extends AppCompatActivity {
         list_rest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                makeToast(i);
+                createOrder(i);
             }
         });
 
     }
 
-    private void makeToast(int i) {
-        Toast.makeText(this, "Has seleccionado este restaurante: " + lista.get(i).getName(), Toast.LENGTH_SHORT).show();
+    private void createOrder(int i) {
+        Intent intent = new Intent(this, OrderCreatorActivity.class);
+        intent.putExtra("restaurant", lista.get(i).getName());
+        startActivity(intent);
     }
 
     public void searchCity(View v) {
