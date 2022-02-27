@@ -9,9 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import com.example.das_wannafood.models.Food;
+import com.example.das_wannafood.models.Order;
 import com.example.das_wannafood.models.Restaurant;
 import com.example.das_wannafood.models.User;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MiDB extends SQLiteOpenHelper {
@@ -22,16 +24,25 @@ public class MiDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        // select r.id,f.name, res.name from restfood as r join food as f join restaurants res on r.id = f.id and r.id = res.id;
         // Creación de la tabla de los usuarios
         sqLiteDatabase.execSQL("create table users('id' integer primary key autoincrement not null, 'username' varchar(255) not null, 'email' varchar(255) not null, 'password' varchar(255) not null)");
         sqLiteDatabase.execSQL("create table restaurants('id' integer primary key autoincrement not null, 'name' varchar(255) not null, 'image_path' varchar(255) not null, 'city' varchar(255) not null)");
-        sqLiteDatabase.execSQL("create table food('id' integer primary key autoincrement not null, 'name' varchar(255) not null, 'image_path' integer not null)");
-        sqLiteDatabase.execSQL("create table restfood('id' integer primary key autoincrement not null, 'rest_name' varchar(255) not null, 'food_name' varchar(255) not null, foreign key(rest_name) references restaurants(name), foreign key(food_name) references food(name))");
-        sqLiteDatabase.execSQL("create table orders('id' integer not null, 'username' varchar(255) not null, 'rest_name' varchar(255) not null, 'food_name' varchar(255) not null, foreign key(rest_name) references restaurants(name), foreign key(food_name) references food(name), foreign key(username) references users(username), primary key(id, rest_name, food_name, username))");
-
+        sqLiteDatabase.execSQL("create table food('id' integer primary key autoincrement not null, 'name' varchar(255) not null, 'image_path' varchar(255) not null, 'price' varchar(255) not null)");
+        sqLiteDatabase.execSQL("create table restfood('id' integer primary key autoincrement not null, 'rest_id' integer not null, 'food_id' integer not null, foreign key(\"rest_id\") references restaurants(id), foreign key(\"food_id\") references food(id))");
+        sqLiteDatabase.execSQL("create table orders('id' integer not null, 'user_id' integer not null, 'rest_id' integer not null, 'food_id' integer not null, 'pending' integer not null, foreign key(rest_id) references restaurants(id), foreign key(food_id) references food(id), foreign key(user_id) references users(id), primary key(id, rest_id, food_id, user_id))");
 
         sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Tagliatella\", \"tagliatella\", \"bilbao\")");
         sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Burger King\", \"burger\", \"bilbao\")");
+
+        sqLiteDatabase.execSQL("insert into food(\"name\", \"image_path\", \"price\") values(\"Pizza\", \"pizza\", \"8.99\")");
+        sqLiteDatabase.execSQL("insert into food(\"name\", \"image_path\", \"price\") values(\"Patatas\", \"patatas\", \"2.99\")");
+        sqLiteDatabase.execSQL("insert into food(\"name\", \"image_path\", \"price\") values(\"Tarta\", \"tarta\", \"3.99\")");
+
+        sqLiteDatabase.execSQL("insert into restfood(\"rest_id\", \"food_id\") values(1,1)");
+        sqLiteDatabase.execSQL("insert into restfood(\"rest_id\", \"food_id\") values(1,3)");
+        sqLiteDatabase.execSQL("insert into restfood(\"rest_id\", \"food_id\") values(2,2)");
+        sqLiteDatabase.execSQL("insert into restfood(\"rest_id\", \"food_id\") values(2,3)");
     }
 
     @Override
@@ -80,9 +91,30 @@ public class MiDB extends SQLiteOpenHelper {
         return list;
     }
 
-    /*public ArrayList<Food> getFoodFromRestaurant(String restaurant_name) {
+    public ArrayList<Food> getFoodFromRestaurant(String restaurant_name) {
         ArrayList<Food> list = new ArrayList<Food>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("Select f.name, f.image_path from ")
-    }*/
+        Cursor c = db.rawQuery("Select f.name, f.image_path, f.price from restfood as r join food as f join restaurants as res on r.food_id=f.id and r.rest_id=res.id where res.name='"+restaurant_name+"'", null);
+        while(c.moveToNext()) {
+            list.add(new Food(c.getString(0), c.getString(1), c.getString(2)));
+        }
+        return list;
+    }
+
+    public ArrayList<Order> getPendingOrder() {
+        // TO DO
+        ArrayList<Order> list = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("", null);
+        Order order;
+        if(c.getCount() == 0) {
+            return null;
+        } else {
+            while(c.moveToNext()) {
+                list.add(new Order());
+            }
+        }
+        return list;
+    }
+
 }

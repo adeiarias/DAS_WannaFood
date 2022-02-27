@@ -4,10 +4,12 @@ public class Food {
 
     private String name;
     private String image;
+    private String price;
 
-    public Food(String pname, String pimage) {
+    public Food(String pname, String pimage, String pprice) {
         this.name = pname;
         this.image = pimage;
+        this.price = pprice;
     }
 
     public String getName() {
@@ -24,5 +26,13 @@ public class Food {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String pprice) {
+        this.price = pprice;
     }
 }
