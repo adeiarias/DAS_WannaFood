@@ -101,20 +101,31 @@ public class MiDB extends SQLiteOpenHelper {
         return list;
     }
 
-    public ArrayList<Order> getPendingOrder() {
+    public Order getPendingOrder() {
         // TO DO
-        ArrayList<Order> list = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery("", null);
-        Order order;
+        Order order = null;
         if(c.getCount() == 0) {
             return null;
         } else {
             while(c.moveToNext()) {
-                list.add(new Order());
+                order = new Order();
             }
         }
-        return list;
+        return order;
+    }
+
+    public void deletePedingOrder() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete("orders", "pending=0", null);
+    }
+
+    public void finishPendingOrder() {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues modificacion = new ContentValues();
+        modificacion.put("pending",1);
+        db.update("orders", modificacion, "pending=0", null);
     }
 
 }

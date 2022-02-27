@@ -32,6 +32,7 @@
         android:id="@+id/btn_view_order_food"
         android:layout_width="123dp"
         android:layout_height="43dp"
+        android:onClick="viewOrder"
         android:text="@string/view_order_food_btn"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/recycle_food"

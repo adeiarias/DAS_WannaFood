@@ -30,4 +30,6 @@
     <string name="btn_prefs">Preferences</string>
     <string name="view_order_food_btn">View Order</string>
     <string name="without_food">This restaurant doesn\'t seem to have any food, pick another one</string>
+    <string name="warning">WARNING!!!</string>
+    <string name="pedingOrder">There is a peding order:</string>
 </resources>

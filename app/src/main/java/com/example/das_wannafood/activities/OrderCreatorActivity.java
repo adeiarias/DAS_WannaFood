@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -48,6 +49,11 @@ public class OrderCreatorActivity extends AppCompatActivity {
 
         // Para que aparezca la comida del restaurante
         searchFood();
+    }
+
+    public void viewOrder(View v) {
+        Intent intent = new Intent(this, ActualOrderActivity.class);
+        startActivity(intent);
     }
 
     // Cuando un producto se haya escogido, se activará el botón

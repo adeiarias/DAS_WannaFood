@@ -3,6 +3,7 @@ package com.example.das_wannafood.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -29,11 +30,19 @@ public class ActualOrderActivity extends AppCompatActivity {
         db = new MiDB(this, "App", null ,1);
     }
 
-    public void deleteOrder(View v) {
 
+
+    public void deleteOrder(View v) {
+        db.deletePedingOrder();
+        Intent intent = new Intent(this, MainPageActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     public void finishOrder(View v) {
-
+        db.finishPendingOrder();
+        Intent intent = new Intent(this, MainPageActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
