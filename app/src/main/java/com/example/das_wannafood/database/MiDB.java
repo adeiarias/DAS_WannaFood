@@ -34,6 +34,12 @@ public class MiDB extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Tagliatella\", \"tagliatella\", \"bilbao\")");
         sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Burger King\", \"burger\", \"bilbao\")");
+        sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Tagliatella\", \"tagliatella\", \"barcelona\")");
+        sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Burger King\", \"burger\", \"madrid\")");
+        sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Tagliatella\", \"tagliatella\", \"madrid\")");
+        sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Burger King\", \"burger\", \"sevilla\")");
+        sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Tagliatella\", \"tagliatella\", \"sevilla\")");
+        sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Burger King\", \"burger\", \"valencia\")");
 
         sqLiteDatabase.execSQL("insert into food(\"name\", \"image_path\", \"price\") values(\"Pizza\", \"pizza\", \"8.99\")");
         sqLiteDatabase.execSQL("insert into food(\"name\", \"image_path\", \"price\") values(\"Patatas\", \"patatas\", \"2.99\")");

@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.das_wannafood.R;
 import com.example.das_wannafood.database.MiDB;
+import com.example.das_wannafood.models.Order;
 
 public class ActualOrderActivity extends AppCompatActivity {
 
@@ -28,9 +30,21 @@ public class ActualOrderActivity extends AppCompatActivity {
         recycler = (RecyclerView) findViewById(R.id.recycler_actual_order);
 
         db = new MiDB(this, "App", null ,1);
+        setOrderInformation();
     }
 
+    private void setOrderInformation() {
+        Order order = db.getPendingOrder();
+        if(order == null) { // No se ha hecho ninguna orden, se vuelve a la pantalla inicial
+            Intent intent = new Intent(this, MainPageActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, getString(R.string.noOrder), Toast.LENGTH_SHORT).show();
+            finish();
+        } else {
+            orderId.setText(order.getId());
 
+        }
+    }
 
     public void deleteOrder(View v) {
         db.deletePedingOrder();

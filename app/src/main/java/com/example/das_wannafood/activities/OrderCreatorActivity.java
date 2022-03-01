@@ -1,6 +1,7 @@
 package com.example.das_wannafood.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,14 +15,17 @@ import android.widget.Toast;
 import com.example.das_wannafood.R;
 import com.example.das_wannafood.adapters.AdapterRecycler;
 import com.example.das_wannafood.adapters.AdapterRestaurantListView;
+import com.example.das_wannafood.adapters.ElViewHolder;
 import com.example.das_wannafood.database.MiDB;
+import com.example.das_wannafood.dialogs.DialogoPedidoPendiente;
 import com.example.das_wannafood.models.Food;
+import com.example.das_wannafood.models.Order;
 import com.example.das_wannafood.models.Restaurant;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class OrderCreatorActivity extends AppCompatActivity {
+public class OrderCreatorActivity extends AppCompatActivity implements ElViewHolder.onFoodListener, DialogoPedidoPendiente.ListenerdelDialogo {
 
     private TextView restaurant_name;
     private RecyclerView recycler;
@@ -29,6 +33,7 @@ public class OrderCreatorActivity extends AppCompatActivity {
     private MiDB db;
     private ArrayList<Food> lista; //lista en la que se almacenará la comida del restaurante
     private AdapterRecycler eladaptador;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,24 +68,11 @@ public class OrderCreatorActivity extends AppCompatActivity {
         }
     }
 
-    // Se mirará si existe alguna orden, en caso de haberlo, se denegará el crear uno nuevo
-    /*private boolean verifyEmptyOrder() {
-        // Si el botón está invisible, ya sabemos que en este restaurante no hay una orden vigente
-        // Se mira con la visibilidad, para evitar llamar a la base de datos varias veces
-        if(btn_order.getVisibility() == View.INVISIBLE) {
-            if(db.orderCount() != 0) {
-                // insertar dialogo que diga que hay una orden vigente
-                return false;
-            }
-        }
-        return true;
-    }*/
-
     public void searchFood() {
         lista = db.getFoodFromRestaurant(restaurant_name.getText().toString());
         if (lista.size() != 0) {
             String[][] arrayRestaurantes = getFoodDataInArray(lista);
-            eladaptador = new AdapterRecycler(getImageIds(arrayRestaurantes[0]),arrayRestaurantes[1],arrayRestaurantes[2]);
+            eladaptador = new AdapterRecycler(getImageIds(arrayRestaurantes[0]),arrayRestaurantes[1],arrayRestaurantes[2], this);
             recycler.setAdapter(eladaptador);
             GridLayoutManager elLayoutRejillaIgual= new GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false);
             recycler.setLayoutManager(elLayoutRejillaIgual);
@@ -114,5 +106,29 @@ public class OrderCreatorActivity extends AppCompatActivity {
             returnList[i] = this.getApplicationContext().getResources().getIdentifier(images[i], "drawable", this.getApplicationContext().getPackageName());
         }
         return returnList;
+    }
+
+    @Override
+    public void onFoodListener(int position) {
+        Food food = lista.get(position);
+        //Order order = db.getPendingOrder();
+        Order order = null;
+        // si no hubiera ninguna orden reciente, se crea una nueva
+        // si no, mostrar dialog y enviar al main activity
+        if(order != null) {
+            activateButton();
+            // db.createOrder();
+        } else {
+            //DialogFragment dialogFragment = new DialogoPedidoPendiente(order.getRestaurant(), order.getRestaurant());
+            DialogFragment dialogFragment = new DialogoPedidoPendiente("Burger", "Bilbao");
+            dialogFragment.show(getSupportFragmentManager(), "pedido existente");
+        }
+    }
+
+    @Override
+    public void pedidoPendiente() {
+        Intent intent = new Intent(this, MainPageActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

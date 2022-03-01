@@ -3,6 +3,7 @@ package com.example.das_wannafood.dialogs;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,33 +11,41 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import com.example.das_wannafood.R;
 import com.example.das_wannafood.database.MiDB;
-import com.example.das_wannafood.models.Order;
 
 public class DialogoPedidoPendiente extends DialogFragment {
 
     private MiDB db;
     private AlertDialog.Builder builder;
+    private String restaurant;
+    private String city;
+
+    ListenerdelDialogo miListener;
+
+    public interface ListenerdelDialogo {
+        void pedidoPendiente();
+    }
+
+    public DialogoPedidoPendiente(String pRest, String pCity) {
+        this.restaurant = pRest;
+        this.city = pCity;
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
+        miListener = (ListenerdelDialogo) getActivity();
         db = new MiDB(getActivity(), "App", null ,1);
         builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(getString(R.string.warning));
-        pendingOrder();
+        builder.setMessage(getString(R.string.pedingOrder) + " Restaurant: " + this.restaurant + " City: " + this.city);
         builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                System.out.println("No hacer nada");
+                // Llamar al metodo pedidoPendiente del listener de la actividad
+                miListener.pedidoPendiente();
             }
         });
         return builder.create();
-    }
-
-    private void pendingOrder() {
-        Order order = db.getPendingOrder();
-        if(order != null) {
-            builder.setMessage(getString(R.string.pedingOrder) + " Restaurant: " + order.getRestaurant() + " City: " + order.getCity());
-        }
     }
 }

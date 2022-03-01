@@ -32,4 +32,5 @@
     <string name="without_food">This restaurant doesn\'t seem to have any food, pick another one</string>
     <string name="warning">WARNING!!!</string>
     <string name="pedingOrder">There is a peding order:</string>
+    <string name="noOrder">A peding order doesn\'t exist</string>
 </resources>

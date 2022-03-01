@@ -22,7 +22,7 @@ public class MainPageActivity extends AppCompatActivity {
         current_user = findViewById(R.id.welcome_text);
 
         Bundle extra_values = getIntent().getExtras();
-        current_user.setText(current_user.getText().toString() + " " + extra_values.getString("username"));
+        //current_user.setText(current_user.getText().toString() + " " + extra_values.getString("username"));
     }
 
     // Cerrar sesión
