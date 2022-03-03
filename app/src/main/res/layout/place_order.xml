@@ -1,59 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".fragments.PlaceOrderFragment">
 
+    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/place_order_title"
-        android:layout_width="313dp"
-        android:layout_height="25dp"
-        android:gravity="center|left"
-        android:text="@string/place_order_title"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.204"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.039" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment" />
 
-    <EditText
-        android:id="@+id/cityEdit"
-        android:layout_width="233dp"
-        android:layout_height="39dp"
-        android:ems="10"
-        android:hint="Insert a city name"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.125"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/place_order_title"
-        app:layout_constraintVertical_bias="0.028" />
-
-    <Button
-        android:id="@+id/btn_search_city"
-        android:layout_width="100dp"
-        android:layout_height="41dp"
-        android:onClick="searchCity"
-        android:text="@string/btn_city_search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.357"
-        app:layout_constraintStart_toEndOf="@+id/cityEdit"
-        app:layout_constraintTop_toBottomOf="@+id/place_order_title"
-        app:layout_constraintVertical_bias="0.028" />
-
-    <ListView
-        android:id="@+id/restaurant_list"
-        android:layout_width="342dp"
-        android:layout_height="532dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cityEdit"
-        app:layout_constraintVertical_bias="0.822" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

@@ -1,5 +1,6 @@
 package com.example.das_wannafood.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -56,5 +57,19 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreateAccount(View v) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("username_login", user_text.getText().toString());
+        outState.putString("password_login", pass_text.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        user_text.setText(savedInstanceState.getString("username_login"));
+        pass_text.setText(savedInstanceState.getString("password_login"));
     }
 }

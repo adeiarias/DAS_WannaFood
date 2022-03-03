@@ -1,5 +1,6 @@
 package com.example.das_wannafood.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -48,5 +49,21 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("username_register", user_text.getText().toString());
+        outState.putString("email_register", email_text.getText().toString());
+        outState.putString("password_register", pass_text.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        user_text.setText(savedInstanceState.getString("username_register"));
+        pass_text.setText(savedInstanceState.getString("password_register"));
+        email_text.setText(savedInstanceState.getString("email_register"));
     }
 }

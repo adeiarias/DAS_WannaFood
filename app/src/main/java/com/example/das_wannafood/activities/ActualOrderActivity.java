@@ -34,7 +34,8 @@ public class ActualOrderActivity extends AppCompatActivity {
     }
 
     private void setOrderInformation() {
-        Order order = db.getPendingOrder();
+        //Order order = db.getPendingOrder();
+        Order order = null;
         if(order == null) { // No se ha hecho ninguna orden, se vuelve a la pantalla inicial
             Intent intent = new Intent(this, MainPageActivity.class);
             startActivity(intent);

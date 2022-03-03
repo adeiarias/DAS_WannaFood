@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,11 +25,15 @@ public class PlaceOrderActivity extends AppCompatActivity {
     private EditText cityName;
     private MiDB db;
     private ArrayList<Restaurant> lista;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.place_order);
+        setContentView(R.layout.place_order_fragment);
+
+        Bundle extra_values = getIntent().getExtras();
+        username = extra_values.getString("username");
 
         list_rest = findViewById(R.id.restaurant_list);
         cityName = findViewById(R.id.cityEdit);
@@ -48,7 +51,9 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
     private void createOrder(int i) {
         Intent intent = new Intent(this, OrderCreatorActivity.class);
+        intent.putExtra("username", username);
         intent.putExtra("restaurant", lista.get(i).getName());
+        intent.putExtra("city", cityName.getText().toString());
         startActivity(intent);
     }
 

@@ -38,7 +38,7 @@ public class DialogoPedidoPendiente extends DialogFragment {
         db = new MiDB(getActivity(), "App", null ,1);
         builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(getString(R.string.warning));
-        builder.setMessage(getString(R.string.pedingOrder) + " Restaurant: " + this.restaurant + " City: " + this.city);
+        builder.setMessage(getString(R.string.pedingOrder) + " \nRestaurant: " + this.restaurant + " \nCity: " + this.city + "\n" + getString(R.string.cancelPedidoMessage));
         builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {

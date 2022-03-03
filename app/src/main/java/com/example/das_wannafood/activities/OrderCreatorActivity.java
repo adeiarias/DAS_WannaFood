@@ -33,6 +33,8 @@ public class OrderCreatorActivity extends AppCompatActivity implements ElViewHol
     private MiDB db;
     private ArrayList<Food> lista; //lista en la que se almacenará la comida del restaurante
     private AdapterRecycler eladaptador;
+    private String username;
+    private String city;
 
 
     @Override
@@ -40,14 +42,16 @@ public class OrderCreatorActivity extends AppCompatActivity implements ElViewHol
         super.onCreate(savedInstanceState);
         setContentView(R.layout.food_order);
 
-        Bundle extras = getIntent().getExtras();
+        Bundle extra_values = getIntent().getExtras();
+        username = extra_values.getString("username");
+        city = extra_values.getString("city");
 
         btn_order = (Button) findViewById(R.id.btn_view_order_food);
         // Hasta que no se haya escogido ningún producto el botón estará invisibilizado
         btn_order.setVisibility(View.INVISIBLE);
 
         restaurant_name = findViewById(R.id.restaurant_order);
-        restaurant_name.setText(extras.getString("restaurant"));
+        restaurant_name.setText(extra_values.getString("restaurant"));
         recycler = findViewById(R.id.recycle_food);
 
         db = new MiDB(this, "App", null ,1);
@@ -92,7 +96,7 @@ public class OrderCreatorActivity extends AppCompatActivity implements ElViewHol
             food = iter.next();
             arrayData[0][i] = food.getImage(); // fila 0 de la matriz son los nombre de los restaurantes
             arrayData[1][i] = food.getName(); // fila 1 de la matriz son las rutas de las imágenes
-            arrayData[2][i] = food.getPrice();
+            arrayData[2][i] = Float.toString(food.getPrice());
             i++;
         }
 
@@ -111,16 +115,19 @@ public class OrderCreatorActivity extends AppCompatActivity implements ElViewHol
     @Override
     public void onFoodListener(int position) {
         Food food = lista.get(position);
-        //Order order = db.getPendingOrder();
-        Order order = null;
+        // Se le pasa el nombre de usuario y el nombre del restaurante, porque puede ser que haya dos pedidos de dos usuarios distintos
+        // en el mismo restaurante
+        ArrayList<String> lista = db.getPendingOrder(username, restaurant_name.getText().toString(), city);
         // si no hubiera ninguna orden reciente, se crea una nueva
-        // si no, mostrar dialog y enviar al main activity
-        if(order != null) {
+        // Añadir producto en una orden ya existente del mismo restaurante
+        // Mostrar dialogo cuando se intente añadir una orden en un restaurante cuando haya ya una orden creada en otro restaurante
+        if(lista.size() == 0) {
+            // Si el boton de view order ya estuviera visible, no se haria nada
             activateButton();
-            // db.createOrder();
+            db.createOrder("1", restaurant_name.getText().toString(), username, food.getName(), food.getPrice());
+            Toast.makeText(this, food.getName() + " " + getString(R.string.addedToOrder), Toast.LENGTH_SHORT).show();
         } else {
-            //DialogFragment dialogFragment = new DialogoPedidoPendiente(order.getRestaurant(), order.getRestaurant());
-            DialogFragment dialogFragment = new DialogoPedidoPendiente("Burger", "Bilbao");
+            DialogFragment dialogFragment = new DialogoPedidoPendiente(lista.get(1), lista.get(2));
             dialogFragment.show(getSupportFragmentManager(), "pedido existente");
         }
     }
@@ -128,6 +135,7 @@ public class OrderCreatorActivity extends AppCompatActivity implements ElViewHol
     @Override
     public void pedidoPendiente() {
         Intent intent = new Intent(this, MainPageActivity.class);
+        intent.putExtra("username", username);
         startActivity(intent);
         finish();
     }

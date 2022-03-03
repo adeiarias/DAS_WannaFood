@@ -4,9 +4,9 @@ public class Food {
 
     private String name;
     private String image;
-    private String price;
+    private float price;
 
-    public Food(String pname, String pimage, String pprice) {
+    public Food(String pname, String pimage, float pprice) {
         this.name = pname;
         this.image = pimage;
         this.price = pprice;
@@ -28,11 +28,11 @@ public class Food {
         this.image = image;
     }
 
-    public String getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(String pprice) {
+    public void setPrice(float pprice) {
         this.price = pprice;
     }
 }
