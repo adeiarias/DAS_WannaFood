@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
             if(user == null) {
                 Toast.makeText(this, getString(R.string.invalidCredentials), Toast.LENGTH_SHORT).show();
             } else { // Credenciales correctas, pasar a la siguiente actividad
-                Intent intent = new Intent(this, MainPageActivity.class);
+                Intent intent = new Intent(this, PlaceOrderActivity.class);
                 intent.putExtra("username", user.getUsername());
                 startActivity(intent);
                 finish();

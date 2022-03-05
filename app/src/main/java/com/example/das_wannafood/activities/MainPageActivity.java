@@ -58,9 +58,11 @@ public class MainPageActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.shopping) { // Si se ha pulsado shopping, se creará una actividad para mostrar el pedido actual
+
             /*Intent i = new Intent (this, FavoritosActivity.class);
             i.putExtra("usuario", usuario);
             startActivity(i);*/
+
             System.out.println("hola");
         } else if (id == R.id.preferences) { // Si se ha pulsado preferencias, se podrán gestionar las preferencias de la app
             /*Intent i = new Intent (this, VerMasTardeActivity.class);

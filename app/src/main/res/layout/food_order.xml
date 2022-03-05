@@ -5,40 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/restaurant_order"
-        android:layout_width="250dp"
-        android:layout_height="37dp"
-        android:gravity="center|left"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.083"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycle_food"
-        android:layout_width="371dp"
-        android:layout_height="640dp"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_order_verti"
+        android:name="com.example.das_wannafood.fragments.Food_order_fragment"
+        android:layout_width="411dp"
+        android:layout_height="732dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/restaurant_order"
-        app:layout_constraintVertical_bias="0.837" />
-
-    <Button
-        android:id="@+id/btn_view_order_food"
-        android:layout_width="123dp"
-        android:layout_height="43dp"
-        android:onClick="viewOrder"
-        android:text="@string/view_order_food_btn"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/recycle_food"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toEndOf="@+id/restaurant_order"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.38" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

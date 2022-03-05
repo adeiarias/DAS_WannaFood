@@ -3,6 +3,7 @@ package com.example.das_wannafood.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,79 +14,47 @@ import android.widget.Toast;
 import com.example.das_wannafood.R;
 import com.example.das_wannafood.adapters.AdapterRestaurantListView;
 import com.example.das_wannafood.database.MiDB;
+import com.example.das_wannafood.fragments.Food_order_fragment;
+import com.example.das_wannafood.fragments.PlaceOrderFragment;
 import com.example.das_wannafood.models.Restaurant;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class PlaceOrderActivity extends AppCompatActivity {
+public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderFragment.PlaceOrderListenerFragment {
 
-    private ListView list_rest;
-    private AdapterRestaurantListView adaptadorRestaurantes;
-    private EditText cityName;
-    private MiDB db;
-    private ArrayList<Restaurant> lista;
-    private String username;
+    private PlaceOrderFragment placeOrderFragment; // Fragment para elegir restaurante
+    private Food_order_fragment food_order_fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.place_order_fragment);
+        setContentView(R.layout.place_order);
 
-        Bundle extra_values = getIntent().getExtras();
-        username = extra_values.getString("username");
-
-        list_rest = findViewById(R.id.restaurant_list);
-        cityName = findViewById(R.id.cityEdit);
-        db = new MiDB(this, "App", null ,1);
-
-        // Gestionar qué hacer cuando se haga click en un elemento de la lista de restaurantes
-        list_rest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                createOrder(i);
-            }
-        });
-
-    }
-
-    private void createOrder(int i) {
-        Intent intent = new Intent(this, OrderCreatorActivity.class);
-        intent.putExtra("username", username);
-        intent.putExtra("restaurant", lista.get(i).getName());
-        intent.putExtra("city", cityName.getText().toString());
-        startActivity(intent);
-    }
-
-    public void searchCity(View v) {
-        if(cityName.getText().toString().isEmpty()) {
-            Toast.makeText(this, getString(R.string.camposVacios), Toast.LENGTH_SHORT).show();
+        // Inicializar el fragment en función de su orientación
+        int orientacion = getResources().getConfiguration().orientation;
+        if(orientacion == Configuration.ORIENTATION_PORTRAIT) {
+            placeOrderFragment = (PlaceOrderFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentPortrait);
         } else {
-            lista = db.getRestaurantList(cityName.getText().toString().toLowerCase());
-            if (lista.size() != 0) {
-                String[][] arrayRestaurantes = getRestaurantDataInArray(lista);
-                adaptadorRestaurantes = new AdapterRestaurantListView(getApplicationContext(), arrayRestaurantes[0], arrayRestaurantes[1]);
-                list_rest.setAdapter(adaptadorRestaurantes);
-            } else {
-                Toast.makeText(this, getString(R.string.noresturants), Toast.LENGTH_SHORT).show();
-            }
+            placeOrderFragment = (PlaceOrderFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentLandscape);
         }
+
     }
 
-    private String[][] getRestaurantDataInArray(ArrayList<Restaurant> l) {
-        Iterator<Restaurant> iter = l.iterator();
-        Restaurant rest;
-        // Array de dos filas (porque en cada fila de la lista hay una imagen y un texto
-        // Y de n columnas (donde n es el número de restaurantes)
-        String[][] arrayData = new String[2][l.size()];
-        int i = 0; // para saber la posición del restaurante en la lista
-        while(iter.hasNext()) {
-            rest = iter.next();
-            arrayData[0][i] = rest.getName(); // fila 0 de la matriz son los nombre de los restaurantes
-            arrayData[1][i] = rest.getImage_path(); // fila 1 de la matriz son las rutas de las imágenes
-            i++;
+    @Override
+    public void seleccionarRestaurantes(String username, String restaurant, String city) {
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE){
+            // Si la orientación es landscape, se obtiene el fragment de food_order
+            food_order_fragment = (Food_order_fragment) getSupportFragmentManager().findFragmentById(R.id.fragment_order_horiz);
         }
-
-        return arrayData;
+        else {
+            // Mirar si es landscape or potrait
+            Intent intent = new Intent(this, OrderCreatorActivity.class);
+            intent.putExtra("username", username);
+            intent.putExtra("restaurant", restaurant);
+            intent.putExtra("city", city);
+            startActivity(intent);
+        }
     }
 }
