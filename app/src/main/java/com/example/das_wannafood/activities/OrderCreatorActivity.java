@@ -49,7 +49,8 @@ public class OrderCreatorActivity extends AppCompatActivity implements Food_orde
 
     @Override
     public void pedidoPendiente(String username) {
-        Intent intent = new Intent(this, MainPageActivity.class);
+        System.out.println("entra?");
+        Intent intent = new Intent(this, PlaceOrderActivity.class);
         intent.putExtra("username", username);
         startActivity(intent);
         finish();

@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DAS_WannaFood">
         <activity
-            android:name=".activities.PreviousOrderActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.ActualOrderActivity"
             android:exported="false" />
         <activity
@@ -22,9 +19,6 @@
             android:name=".activities.PlaceOrderActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".activities.MainPageActivity"
-            android:exported="false" />
         <activity
             android:name=".activities.RegisterActivity"
             android:exported="false"

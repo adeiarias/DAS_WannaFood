@@ -43,6 +43,7 @@ public class DialogoPedidoPendiente extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 // Llamar al metodo pedidoPendiente del listener de la actividad
+                System.out.println("y aqui?");
                 miListener.pedidoPendiente();
             }
         });

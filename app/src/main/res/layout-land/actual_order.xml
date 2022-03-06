@@ -5,43 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/actual_order_id"
-        android:layout_width="171dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:gravity="center|left"
-        android:text="ID:"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
-
-    <TextView
-        android:id="@+id/total_actual_order"
-        android:layout_width="164dp"
-        android:layout_height="42dp"
-        android:gravity="center|left"
-        android:text="Total:"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/actual_order_id"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
-
     <Button
         android:id="@+id/btn_delete_order"
         android:layout_width="128dp"
         android:layout_height="59dp"
-        android:layout_marginStart="56dp"
+        android:layout_marginBottom="116dp"
         android:onClick="deleteOrder"
         android:text="@string/delete_order_btn"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.835"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actual_order_id"
-        app:layout_constraintVertical_bias="0.032" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_finish_order"
+        app:layout_constraintVertical_bias="0.784" />
 
     <Button
         android:id="@+id/btn_finish_order"
@@ -51,18 +27,22 @@
         android:text="@string/finish_order_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.464"
-        app:layout_constraintStart_toEndOf="@+id/btn_delete_order"
-        app:layout_constraintTop_toBottomOf="@+id/actual_order_id"
-        app:layout_constraintVertical_bias="0.032" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_actual_order"
-        android:layout_width="381dp"
-        android:layout_height="561dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.835"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.905" />
+        app:layout_constraintVertical_bias="0.329" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragemtActualLand"
+        android:name="com.example.das_wannafood.fragments.ActualOrder_fragment"
+        android:layout_width="414dp"
+        android:layout_height="354dp"
+        android:layout_marginEnd="44dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_finish_order"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.491" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

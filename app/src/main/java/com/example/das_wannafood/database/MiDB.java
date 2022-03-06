@@ -121,14 +121,12 @@ public class MiDB extends SQLiteOpenHelper {
             return lista;
         } else {
             while(c.moveToNext()) {
-                System.out.println("AQUI1");
                 id=c.getString(0);
                 rest=c.getString(1);
                 cityName=c.getString(2);
                 break;
             }
             if(!rest.equals(restaurant) || !cityName.equals(city)) { // Ya hay una orden del mismo restaurante, por lo que se añadirá el producto
-                System.out.println("AQUI2");
                 lista.add(id);
                 lista.add(rest);
                 lista.add(cityName);

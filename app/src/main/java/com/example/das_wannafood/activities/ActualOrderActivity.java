@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -11,53 +12,45 @@ import android.widget.Toast;
 
 import com.example.das_wannafood.R;
 import com.example.das_wannafood.database.MiDB;
+import com.example.das_wannafood.fragments.ActualOrder_fragment;
 import com.example.das_wannafood.models.Order;
 
-public class ActualOrderActivity extends AppCompatActivity {
+public class ActualOrderActivity extends AppCompatActivity implements ActualOrder_fragment.ActualOrderListener {
 
-    private TextView orderId;
-    private TextView total;
-    private RecyclerView recycler;
     private MiDB db;
+    private ActualOrder_fragment actualOrder_fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actual_order);
-
-        orderId = findViewById(R.id.actual_order_id);
-        total = findViewById(R.id.total_actual_order);
-        recycler = (RecyclerView) findViewById(R.id.recycler_actual_order);
-
         db = new MiDB(this, "App", null ,1);
-        setOrderInformation();
-    }
 
-    private void setOrderInformation() {
-        //Order order = db.getPendingOrder();
-        Order order = null;
-        if(order == null) { // No se ha hecho ninguna orden, se vuelve a la pantalla inicial
-            Intent intent = new Intent(this, MainPageActivity.class);
-            startActivity(intent);
-            Toast.makeText(this, getString(R.string.noOrder), Toast.LENGTH_SHORT).show();
-            finish();
+        // Inicializar el fragment en función de su orientación
+        int orientacion = getResources().getConfiguration().orientation;
+        if(orientacion == Configuration.ORIENTATION_PORTRAIT) {
+            actualOrder_fragment = (ActualOrder_fragment) getSupportFragmentManager().findFragmentById(R.id.fragemtActualPort);
         } else {
-            orderId.setText(order.getId());
-
+            actualOrder_fragment = (ActualOrder_fragment) getSupportFragmentManager().findFragmentById(R.id.fragemtActualLand);
         }
     }
 
     public void deleteOrder(View v) {
         db.deletePedingOrder();
-        Intent intent = new Intent(this, MainPageActivity.class);
+        Intent intent = new Intent(this, PlaceOrderActivity.class);
         startActivity(intent);
         finish();
     }
 
     public void finishOrder(View v) {
         db.finishPendingOrder();
-        Intent intent = new Intent(this, MainPageActivity.class);
+        Intent intent = new Intent(this, PlaceOrderActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void pedidoPendiente(String username) {
+
     }
 }

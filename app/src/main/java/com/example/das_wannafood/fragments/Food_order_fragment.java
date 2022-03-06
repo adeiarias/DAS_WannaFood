@@ -75,6 +75,7 @@ public class Food_order_fragment extends Fragment implements ElViewHolder.onFood
     // Este método nos permitirá poder inicializar la tabla tanto cuando se inicialice la clase con un intent
     // como cuando se inicialice con el fragment
     private void initializeTable(String pusername, String prestaurant, String pcity) {
+        restaurant_name = (TextView) getView().findViewById(R.id.restaurant_order);
         username = pusername;
         city = pcity;
         restaurant_name.setText(prestaurant);
@@ -144,6 +145,7 @@ public class Food_order_fragment extends Fragment implements ElViewHolder.onFood
     }
 
     public void pedidoPendiente() {
+        System.out.println("dfjdsjfdjsdskpadasopd");
         listener.pedidoPendiente(username);
     }
 }
