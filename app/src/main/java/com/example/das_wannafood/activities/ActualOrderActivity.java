@@ -19,12 +19,14 @@ public class ActualOrderActivity extends AppCompatActivity implements ActualOrde
 
     private MiDB db;
     private ActualOrder_fragment actualOrder_fragment;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actual_order);
         db = new MiDB(this, "App", null ,1);
+        username = getIntent().getExtras().getString("username");
 
         // Inicializar el fragment en función de su orientación
         int orientacion = getResources().getConfiguration().orientation;
@@ -36,21 +38,18 @@ public class ActualOrderActivity extends AppCompatActivity implements ActualOrde
     }
 
     public void deleteOrder(View v) {
-        db.deletePedingOrder();
-        Intent intent = new Intent(this, PlaceOrderActivity.class);
-        startActivity(intent);
+        Toast.makeText(this, getString(R.string.deleteOrder), Toast.LENGTH_SHORT).show();
+        db.deleteOrder(username);
         finish();
     }
 
     public void finishOrder(View v) {
-        db.finishPendingOrder();
-        Intent intent = new Intent(this, PlaceOrderActivity.class);
-        startActivity(intent);
+        db.deleteOrder(username);
         finish();
     }
 
     @Override
-    public void pedidoPendiente(String username) {
-
+    public void finish_activity() {
+        finish();
     }
 }

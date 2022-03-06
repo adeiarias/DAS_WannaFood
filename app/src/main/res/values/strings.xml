@@ -38,6 +38,7 @@
     <string name="basket">Show actual shopping cart</string>
     <string name="logout_menu">Logout from application</string>
     <string name="preferences">Modify app preferences</string>
+    <string name="deleteOrder">This order has been deleted</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

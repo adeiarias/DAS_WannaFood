@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -15,29 +16,39 @@ import android.widget.Toast;
 
 import com.example.das_wannafood.R;
 import com.example.das_wannafood.activities.PlaceOrderActivity;
+import com.example.das_wannafood.adapters.AdapterRecycler;
+import com.example.das_wannafood.adapters.ElViewHolder;
 import com.example.das_wannafood.database.MiDB;
 import com.example.das_wannafood.models.Order;
 
-public class ActualOrder_fragment extends Fragment {
+import java.util.ArrayList;
+import java.util.Iterator;
 
-    private TextView orderId;
+public class ActualOrder_fragment extends Fragment implements ElViewHolder.onFoodListener {
+
     private TextView total;
     private RecyclerView recycler;
     private MiDB db;
+    private String username;
+    private AdapterRecycler eladaptador;
 
     private ActualOrderListener listener;
 
+    @Override
+    public void onFoodListener(int position) {
+        // En este caso no se va a hacer nada, porque no se va a tratar qué hacer cuando se haga click en un producto
+    }
+
     public interface ActualOrderListener {
-        void pedidoPendiente(String username);
+        void finish_activity();
     }
 
     // Une el listener con los métodos implementados en la actividad
     public void onAttach(Context context) {
         super.onAttach(context);
-        try{
+        try {
             listener = (ActualOrderListener) context;
-        }
-        catch (ClassCastException e){
+        } catch (ClassCastException e) {
             throw new ClassCastException("La clase " + context.toString() + "debe implementar listenerDelFragment");
         }
     }
@@ -52,26 +63,45 @@ public class ActualOrder_fragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        username = getActivity().getIntent().getExtras().getString("username");
         recycler = (RecyclerView) getView().findViewById(R.id.recycler_actual_order);
-        orderId = getView().findViewById(R.id.actual_order_id);
         total = getView().findViewById(R.id.total_actual_order);
-        db = new MiDB(getActivity(), "App", null ,1);
+        db = new MiDB(getActivity(), "App", null, 1);
         setOrderInformation();
     }
 
     private void setOrderInformation() {
-        //Order order = db.getPendingOrder();
-        Order order = null;
-        if(order == null) { // No se ha hecho ninguna orden, se vuelve a la pantalla inicial
-            Intent intent = new Intent(getActivity(), PlaceOrderActivity.class);
-            startActivity(intent);
-            Toast.makeText(getActivity(), getString(R.string.noOrder), Toast.LENGTH_SHORT).show();
-            //finish();
+        ArrayList<Order> list = db.getOrder(username);
+        if (list == null) {
+            Toast.makeText(getActivity(), getString(R.string.noOrder), Toast.LENGTH_LONG).show();
+            listener.finish_activity();
         } else {
-            orderId.setText(order.getId());
-
+            Iterator<Order> itr = list.iterator();
+            Order order = null;
+            Double total_price = 0.0;
+            String[] array_nombre_comida = new String[list.size()];
+            int[] array_imagen_comida = new int[list.size()];
+            String[] precios_comida = new String[list.size()];
+            int i = 0;
+            while (itr.hasNext()) {
+                order = itr.next();
+                total_price += order.getPrice();
+                array_nombre_comida[i] = order.getFood();
+                array_imagen_comida[i] = imageNameToInt(order.getPath());
+                precios_comida[i] = Double.toString(order.getPrice());
+                i++;
+            }
+            eladaptador = new AdapterRecycler(array_imagen_comida, array_nombre_comida, precios_comida, this);
+            recycler.setAdapter(eladaptador);
+            GridLayoutManager elLayoutRejillaIgual= new GridLayoutManager(getActivity(),2,GridLayoutManager.VERTICAL,false);
+            recycler.setLayoutManager(elLayoutRejillaIgual);
+            total.setText(Double.toString(total_price));
         }
     }
 
+    private int imageNameToInt(String image) {
+        // Este método va a conseguir el identificador drawable de cada una de las imágenes
+        return getActivity().getApplicationContext().getResources().getIdentifier(image, "drawable", getActivity().getApplicationContext().getPackageName());
+
+    }
 }

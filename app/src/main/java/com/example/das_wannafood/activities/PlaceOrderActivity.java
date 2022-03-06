@@ -28,11 +28,14 @@ public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderF
 
     private PlaceOrderFragment placeOrderFragment; // Fragment para elegir restaurante
     private Food_order_fragment food_order_fragment;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.place_order);
+
+        username = getIntent().getExtras().getString("username");
 
         // Asignar del Toolbar personalizado
         setSupportActionBar(findViewById(R.id.toolbarPrincipal));
@@ -76,17 +79,14 @@ public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderF
         int id = item.getItemId();
         if (id == R.id.shopping) { // Si se ha pulsado shopping, se creará una actividad para mostrar el pedido actual
             Intent intent = new Intent(this, ActualOrderActivity.class);
+            intent.putExtra("username", username);
             startActivity(intent);
-            /*Intent i = new Intent (this, FavoritosActivity.class);
-            i.putExtra("usuario", usuario);
-            startActivity(i);*/
 
-            System.out.println("hola");
         } else if (id == R.id.preferences) { // Si se ha pulsado preferencias, se podrán gestionar las preferencias de la app
             /*Intent i = new Intent (this, VerMasTardeActivity.class);
             i.putExtra("usuario", usuario);
             startActivity(i);*/
-            System.out.println("hola");
+
         } else if (id == R.id.logout) { // Si se ha pulsado logout, se volverá a la pantalla del login
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);

@@ -1,50 +1,29 @@
 package com.example.das_wannafood.models;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Order {
 
-    private String id;
-    private String restaurant;
+    private String path;
     private String food;
-    private String city;
-    private String user;
+    private Double price;
 
-    public String getId() {
-        return id;
+    public Order(Double pprice, String ppath, String pname) {
+        path = ppath;
+        food = pname;
+        price = pprice;
     }
 
-    public String getRestaurant() {
-        return restaurant;
+    public String getPath() {
+        return path;
     }
 
     public String getFood() {
         return food;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setRestaurant(String restaurant) {
-        this.restaurant = restaurant;
-    }
-
-    public void setFood(String food) {
-        this.food = food;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
+    public Double getPrice() {
+        return price;
     }
 }

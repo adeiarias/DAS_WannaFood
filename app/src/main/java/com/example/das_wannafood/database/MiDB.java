@@ -31,7 +31,7 @@ public class MiDB extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("create table restaurants('id' integer primary key autoincrement not null, 'name' varchar(255) not null, 'image_path' varchar(255) not null, 'city' varchar(255) not null)");
         sqLiteDatabase.execSQL("create table food('id' integer primary key autoincrement not null, 'name' varchar(255) not null, 'image_path' varchar(255) not null, 'price' real not null)");
         sqLiteDatabase.execSQL("create table restfood('id' integer primary key autoincrement not null, 'rest_id' integer not null, 'food_id' integer not null, foreign key(\"rest_id\") references restaurants(id), foreign key(\"food_id\") references food(id))");
-        sqLiteDatabase.execSQL("create table orders('id' integer not null, 'user_id' integer not null, 'rest_id' integer not null, 'food_id' integer not null, 'pending' integer not null, 'price' real not null, foreign key(rest_id) references restaurants(id), foreign key(food_id) references food(id), foreign key(user_id) references users(id), primary key(id, rest_id, food_id, user_id))");
+        sqLiteDatabase.execSQL("create table orders('id' integer not null, 'user_id' integer not null, 'rest_id' integer not null, 'food_id' integer not null, 'price' real not null, foreign key(rest_id) references restaurants(id), foreign key(food_id) references food(id), foreign key(user_id) references users(id), primary key(id, rest_id, food_id, user_id))");
 
         sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Tagliatella\", \"tagliatella\", \"bilbao\")");
         sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Burger King\", \"burger\", \"bilbao\")");
@@ -50,6 +50,8 @@ public class MiDB extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("insert into restfood(\"rest_id\", \"food_id\") values(1,3)");
         sqLiteDatabase.execSQL("insert into restfood(\"rest_id\", \"food_id\") values(2,2)");
         sqLiteDatabase.execSQL("insert into restfood(\"rest_id\", \"food_id\") values(2,3)");
+
+        sqLiteDatabase.execSQL("insert into orders values(\"1\",\"1\",\"1\",\"1\",5.5)");
     }
 
     @Override
@@ -135,25 +137,34 @@ public class MiDB extends SQLiteOpenHelper {
         return lista;
     }
 
+    public ArrayList<Order> getOrder(String username) {
+        ArrayList<Order> lista = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("select f.price, f.image_path, f.name from users as u join orders as o join food as f on u.id = o.user_id and o.food_id = f.id where u.username = '"+username+"'", null);
+        if(c.getCount() == 0) {
+            return null;
+        } else {
+            while(c.moveToNext()) {
+                Double price = c.getDouble(0);
+                String path = c.getString(1);
+                String name = c.getString(2);
+                lista.add(new Order(price, path, name));
+            }
+        }
+        return lista;
+    }
+
     public void createOrder(String id, String restaurant, String username, String food, Float price) {
         SQLiteDatabase db = getWritableDatabase();
         // Mirar que el producto que se quiere comprar no está ya seleccionado
         Cursor c = db.rawQuery("select o.id from orders as o join restaurants as r join users as u join food as f on o.user_id=u.id and o.rest_id=r.id and o.food_id=f.id where o.pending=1 and f.name='"+food+"'", null);
         if(c.getCount() == 0) {
-            db.execSQL("insert into orders values("+Integer.parseInt(id)+", (select id from users where username='"+username+"'), (select id from restaurants where name='"+restaurant+"'), (select id from food where name='"+food+"'), 1, (select price from food where name='"+food+"'))");
+            db.execSQL("insert into orders values("+Integer.parseInt(id)+", (select id from users where username='"+username+"'), (select id from restaurants where name='"+restaurant+"'), (select id from food where name='"+food+"'), (select price from food where name='"+food+"'))");
         }
     }
 
-    public void deletePedingOrder() {
+    public void deleteOrder(String username) {
         SQLiteDatabase db = getWritableDatabase();
-        db.delete("orders", "pending=0", null);
+        db.execSQL("delete from orders where user_id=(select id from users where username='"+username+"')");
     }
-
-    public void finishPendingOrder() {
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues modificacion = new ContentValues();
-        modificacion.put("pending",1);
-        db.update("orders", modificacion, "pending=0", null);
-    }
-
 }
