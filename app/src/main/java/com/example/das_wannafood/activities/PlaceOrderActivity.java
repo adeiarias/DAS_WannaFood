@@ -1,5 +1,6 @@
 package com.example.das_wannafood.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -95,5 +96,30 @@ public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderF
     @Override
     public void hayPedidoPedienteHorizontal(String username) {
 
+    }
+
+    // Gestionar que no se pierda la información cuando se cambia la orientación del dispositivo
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // Se va a guardar el texto que se haya introduccido en el editText del fragment de placeOrder
+        outState.putString("cityName", placeOrderFragment.getEditTextString());
+        //outState.putInt("count", placeOrderFragment.getListViewItemCount()); // Conseguir el número de elementos que hay en el listview
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        // Recuperamos el string guardado cuando se ha cambiado la orientación y se vuelven a mostrar los elementos si proceden
+        if(savedInstanceState != null) {
+            String cityName = savedInstanceState.getString("cityName");
+            if(!cityName.isEmpty()) {
+                //int listViewCount = savedInstanceState.getInt("count");
+                //if(listViewCount != 0) { // Si no hay elementos en el listview no se hará la petición a la base de datos
+                placeOrderFragment.setEditTextString(cityName);
+                placeOrderFragment.searchEvent(cityName);
+                //}
+            }
+        }
     }
 }

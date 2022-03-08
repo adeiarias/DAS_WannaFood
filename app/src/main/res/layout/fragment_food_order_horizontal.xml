@@ -11,7 +11,6 @@
         android:layout_width="250dp"
         android:layout_height="37dp"
         android:gravity="center|left"
-        android:text="Prueba"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,12 +21,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_food"
-        android:layout_width="367dp"
-        android:layout_height="518dp"
+        android:layout_width="583dp"
+        android:layout_height="245dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/restaurant_order"
-        app:layout_constraintVertical_bias="0.272" />
+        app:layout_constraintVertical_bias="0.495" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

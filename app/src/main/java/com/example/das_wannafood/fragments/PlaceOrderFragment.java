@@ -78,18 +78,7 @@ public class PlaceOrderFragment extends Fragment {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(cityName.getText().toString().isEmpty()) {
-                    Toast.makeText(getActivity(), getString(R.string.camposVacios), Toast.LENGTH_SHORT).show();
-                } else {
-                    lista = db.getRestaurantList(cityName.getText().toString().toLowerCase());
-                    if (lista.size() != 0) {
-                        String[][] arrayRestaurantes = getRestaurantDataInArray(lista);
-                        adaptadorRestaurantes = new AdapterRestaurantListView(getActivity(), arrayRestaurantes[0], arrayRestaurantes[1]);
-                        list_rest.setAdapter(adaptadorRestaurantes);
-                    } else {
-                        Toast.makeText(getActivity(), getString(R.string.noresturants), Toast.LENGTH_SHORT).show();
-                    }
-                }
+                searchEvent(cityName.getText().toString());
             }
         });
 
@@ -102,8 +91,29 @@ public class PlaceOrderFragment extends Fragment {
         });
     }
 
+    public void searchEvent(String cityName) {
+        if(cityName.isEmpty()) {
+            Toast.makeText(getActivity(), getString(R.string.camposVacios), Toast.LENGTH_SHORT).show();
+        } else {
+            lista = db.getRestaurantList(cityName.toLowerCase());
+            if (lista.size() != 0) {
+                String[][] arrayRestaurantes = getRestaurantDataInArray(lista);
+                adaptadorRestaurantes = new AdapterRestaurantListView(getActivity(), arrayRestaurantes[0], arrayRestaurantes[1]);
+                list_rest.setAdapter(adaptadorRestaurantes);
+            } else {
+                Toast.makeText(getActivity(), getString(R.string.noresturants), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     private void createOrder(int i) {
         listener.seleccionarRestaurantes(username, lista.get(i).getName(), cityName.getText().toString());
+    }
+
+    // Este método nos devolverá el número de elementos que hay en el listVIew
+    public int getListViewItemCount() {
+        System.out.println(cityName.getText().toString());
+        return list_rest.getAdapter().getCount();
     }
 
     private String[][] getRestaurantDataInArray(ArrayList<Restaurant> l) {
@@ -123,7 +133,15 @@ public class PlaceOrderFragment extends Fragment {
         return arrayData;
     }
 
+    // Devuelve el texto que se haya insertado en el editText
+    public String getEditTextString() {
+        return cityName.getText().toString();
+    }
 
+    // Asigna un valor al edittext
+    public void setEditTextString(String text) {
+        cityName.setText(text);
+    }
 
 
 }
