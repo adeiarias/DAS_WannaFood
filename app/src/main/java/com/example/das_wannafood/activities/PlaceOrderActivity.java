@@ -7,27 +7,18 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.das_wannafood.R;
-import com.example.das_wannafood.adapters.AdapterRestaurantListView;
-import com.example.das_wannafood.database.MiDB;
-import com.example.das_wannafood.fragments.ActualOrder_fragment;
+import com.example.das_wannafood.dialogs.DialogoPedidoPendiente;
 import com.example.das_wannafood.fragments.Food_order_fragment;
+import com.example.das_wannafood.fragments.Food_order_fragment_horizontal;
 import com.example.das_wannafood.fragments.PlaceOrderFragment;
-import com.example.das_wannafood.models.Restaurant;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
-public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderFragment.PlaceOrderListenerFragment {
+public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderFragment.PlaceOrderListenerFragment, Food_order_fragment_horizontal.FoodListenerFragmentHorizontal, DialogoPedidoPendiente.ListenerdelDialogo {
 
     private PlaceOrderFragment placeOrderFragment; // Fragment para elegir restaurante
     private Food_order_fragment food_order_fragment;
+    private Food_order_fragment_horizontal food_order_fragment_horizontal;
     private String username;
 
     @Override
@@ -45,6 +36,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderF
         if(orientacion == Configuration.ORIENTATION_PORTRAIT) {
             placeOrderFragment = (PlaceOrderFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentPortrait);
         } else {
+            food_order_fragment_horizontal = (Food_order_fragment_horizontal) getSupportFragmentManager().findFragmentById(R.id.order_fragment_horiz);
             placeOrderFragment = (PlaceOrderFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentLandscape);
         }
     }
@@ -54,7 +46,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderF
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE){
             // Si la orientación es landscape, se obtiene el fragment de food_order
-            food_order_fragment = (Food_order_fragment) getSupportFragmentManager().findFragmentById(R.id.fragment_order_horiz);
+            food_order_fragment_horizontal.initializeTable(username, restaurant, city);
         }
         else {
             // Mirar si es landscape or potrait
@@ -93,5 +85,15 @@ public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderF
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void pedidoPendiente() {
+        food_order_fragment_horizontal.pedidoPendiente();
+    }
+
+    @Override
+    public void hayPedidoPedienteHorizontal(String username) {
+
     }
 }

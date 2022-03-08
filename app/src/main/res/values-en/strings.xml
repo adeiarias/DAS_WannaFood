@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">DAS_WannaFood</string>
+    <string name="main_title">WannaFood</string>
+    <string name="login_text">LogIn</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_register_login">SignUp</string>
+    <string name="register_label_login">Create an account</string>
+    <string name="register_text">Register</string>
+    <string name="btn_register">SignUp</string>
+    <string name="welcome_text">Welcome:</string>
+    <string name="what_to_do">What would you like to do?</string>
+    <string name="view_order">View previous orders</string>
+    <string name="make_order">Place an order</string>
+    <string name="camposVacios">Inputs cannot be empty</string>
+    <string name="invalidCredentials">Username or password incorrect</string>
+    <string name="userExist">This user already exists</string>
+    <string name="userCreated">User created successfully</string>
+    <string name="logout">Successfully logged out</string>
+    <string name="btn_logout">LogOut</string>
+    <string name="place_order_title">Place an order</string>
+    <string name="btn_city_search">Search</string>
+    <string name="noresturants">There aren\'t restaurants in that city</string>
+    <string name="view_orders_title">View orders</string>
+    <string name="orders_text">Orders</string>
+    <string name="antiguos">Previous Orders</string>
+    <string name="actual">Actual Order</string>
+    <string name="delete_order_btn">Delete Order</string>
+    <string name="finish_order_btn">Finish Order</string>
+    <string name="previous_orders_text">Previous Orders</string>
+    <string name="btn_prefs">Preferences</string>
+    <string name="view_order_food_btn">View Order</string>
+    <string name="without_food">This restaurant doesn\'t seem to have any food, pick another one</string>
+    <string name="warning">WARNING!!!</string>
+    <string name="pedingOrder">There is a peding order:</string>
+    <string name="noOrder">A peding order doesn\'t exist</string>
+    <string name="addedToOrder">added to order!</string>
+    <string name="cancelPedidoMessage">Please, cancel or finish that order first!</string>
+    <string name="basket">Show actual shopping cart</string>
+    <string name="logout_menu">Logout from application</string>
+    <string name="preferences">Modify app preferences</string>
+    <string name="deleteOrder">This order has been deleted</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

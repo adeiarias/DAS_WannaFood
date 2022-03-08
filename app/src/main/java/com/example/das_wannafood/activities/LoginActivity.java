@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.das_wannafood.R;
@@ -18,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText user_text;
     private EditText pass_text;
+    private ImageView logo;
     private MiDB db;
 
     @Override
@@ -27,6 +29,9 @@ public class LoginActivity extends AppCompatActivity {
 
         user_text = findViewById(R.id.uname_login);
         pass_text = findViewById(R.id.passwd_login);
+        logo = findViewById(R.id.imageView);
+
+        logo.setImageResource(getApplicationContext().getResources().getIdentifier("logo", "drawable", getApplicationContext().getPackageName()));
 
         db = new MiDB(this, "App", null ,1);
     }

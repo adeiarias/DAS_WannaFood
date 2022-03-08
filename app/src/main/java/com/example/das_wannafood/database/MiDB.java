@@ -117,7 +117,7 @@ public class MiDB extends SQLiteOpenHelper {
         String cityName="";
         ArrayList<String> lista = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("select o.id, r.name, r.city from orders as o join restaurants as r join users as u on o.rest_id = r.id and o.user_id = u.id where o.pending = 1 and u.username='"+username+"'", null);
+        Cursor c = db.rawQuery("select o.id, r.name, r.city from orders as o join restaurants as r join users as u on o.rest_id = r.id and o.user_id = u.id where u.username='"+username+"'", null);
         if(c.getCount() == 0) { // No hay ninguna orden creada, por lo que se podrá crear la orden
             System.out.println("AQUI0");
             return lista;
@@ -157,7 +157,7 @@ public class MiDB extends SQLiteOpenHelper {
     public void createOrder(String id, String restaurant, String username, String food, Float price) {
         SQLiteDatabase db = getWritableDatabase();
         // Mirar que el producto que se quiere comprar no está ya seleccionado
-        Cursor c = db.rawQuery("select o.id from orders as o join restaurants as r join users as u join food as f on o.user_id=u.id and o.rest_id=r.id and o.food_id=f.id where o.pending=1 and f.name='"+food+"'", null);
+        Cursor c = db.rawQuery("select o.id from orders as o join restaurants as r join users as u join food as f on o.user_id=u.id and o.rest_id=r.id and o.food_id=f.id where f.name='"+food+"'", null);
         if(c.getCount() == 0) {
             db.execSQL("insert into orders values("+Integer.parseInt(id)+", (select id from users where username='"+username+"'), (select id from restaurants where name='"+restaurant+"'), (select id from food where name='"+food+"'), (select price from food where name='"+food+"'))");
         }

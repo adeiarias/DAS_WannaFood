@@ -25,7 +25,7 @@ import com.example.das_wannafood.models.Food;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Food_order_fragment extends Fragment implements ElViewHolder.onFoodListener {
+public class Food_order_fragment_horizontal extends Fragment implements ElViewHolder.onFoodListener {
 
     private TextView restaurant_name;
     private RecyclerView recycler;
@@ -36,17 +36,17 @@ public class Food_order_fragment extends Fragment implements ElViewHolder.onFood
     private String username;
     private String city;
 
-    private FoodListenerFragment listener;
+    private Food_order_fragment_horizontal.FoodListenerFragmentHorizontal listener;
 
-    public interface FoodListenerFragment {
-        void hayPedidoPediente(String username);
+    public interface FoodListenerFragmentHorizontal {
+        void hayPedidoPedienteHorizontal(String username);
     }
 
     // Une el listener con los métodos implementados en la actividad
     public void onAttach(Context context) {
         super.onAttach(context);
         try{
-            listener = (FoodListenerFragment) context;
+            listener = (Food_order_fragment_horizontal.FoodListenerFragmentHorizontal) context;
         }
         catch (ClassCastException e){
             throw new ClassCastException("La clase " + context.toString() + "debe implementar listenerDelFragment");
@@ -57,7 +57,7 @@ public class Food_order_fragment extends Fragment implements ElViewHolder.onFood
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.food_order_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_food_order_horizontal, container, false);
     }
 
     @Override
@@ -69,12 +69,12 @@ public class Food_order_fragment extends Fragment implements ElViewHolder.onFood
         city = extra_values.getString("city");
         String restaurant = extra_values.getString("restaurant");
 
-        initializeTable(username, restaurant, city);
+        //initializeTable(username, restaurant, city);
     }
 
     // Este método nos permitirá poder inicializar la tabla tanto cuando se inicialice la clase con un intent
     // como cuando se inicialice con el fragment
-    private void initializeTable(String pusername, String prestaurant, String pcity) {
+    public void initializeTable(String pusername, String prestaurant, String pcity) {
         restaurant_name = (TextView) getView().findViewById(R.id.restaurant_order);
         username = pusername;
         city = pcity;
@@ -145,6 +145,6 @@ public class Food_order_fragment extends Fragment implements ElViewHolder.onFood
     }
 
     public void pedidoPendiente() {
-        listener.hayPedidoPediente(username);
+        listener.hayPedidoPedienteHorizontal(username);
     }
 }

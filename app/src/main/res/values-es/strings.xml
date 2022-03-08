@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">DAS_WannaFood</string>
+    <string name="main_title">WannaFood</string>
+    <string name="login_text">LogIn</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_register_login">Registrar</string>
+    <string name="register_label_login">Crear una cuenta</string>
+    <string name="register_text">Registrar</string>
+    <string name="btn_register">SignUp</string>
+    <string name="welcome_text">Bienvenido:</string>
+    <string name="what_to_do">Qué quiere hacer?</string>
+    <string name="view_order">Mirar órdenes previas</string>
+    <string name="make_order">Realizar una orden</string>
+    <string name="camposVacios">El formulario no puede estar vacío</string>
+    <string name="invalidCredentials">Usuario o contraseña incorrecta</string>
+    <string name="userExist">Este usuario ya existe</string>
+    <string name="userCreated">Usuario creado satisfactoriamente</string>
+    <string name="logout">Cierre de sesión satisfactorio</string>
+    <string name="btn_logout">Cerrar sesión</string>
+    <string name="place_order_title">Realizar una orden</string>
+    <string name="btn_city_search">Buscar</string>
+    <string name="noresturants">No hay restaurantes en esa ciudad</string>
+    <string name="view_orders_title">Mirar las órdenes</string>
+    <string name="orders_text">Órdenes</string>
+    <string name="antiguos">Órdenes previas</string>
+    <string name="actual">Orden actual</string>
+    <string name="delete_order_btn">Borrar orden</string>
+    <string name="finish_order_btn">Terminar orden</string>
+    <string name="previous_orders_text">Órdenes previas</string>
+    <string name="btn_prefs">Preferencias</string>
+    <string name="view_order_food_btn">Mirar orden</string>
+    <string name="without_food">Este restaurante no parece tener comida, elige otro</string>
+    <string name="warning">ATENCIÓN!!!</string>
+    <string name="pedingOrder">Existe una orden pediente:</string>
+    <string name="noOrder">No existe una orden pendiente</string>
+    <string name="addedToOrder">añadido a la orden!</string>
+    <string name="cancelPedidoMessage">Por favor, cancela o termina esa orden primero!</string>
+    <string name="basket">Mostrar el carrito de la compra</string>
+    <string name="logout_menu">Cerrar sesión de la aplicación</string>
+    <string name="preferences">Modificar las preferencias de la aplicación</string>
+    <string name="deleteOrder">Esta orden se ha borrado</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
