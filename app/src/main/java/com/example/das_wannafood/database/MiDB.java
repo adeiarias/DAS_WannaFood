@@ -154,6 +154,28 @@ public class MiDB extends SQLiteOpenHelper {
         return lista;
     }
 
+    public Double getOrderPrice(String username) {
+        Double price = 0.0;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("select sum(o.price) from orders as o join users as u on u.id = o.user_id where u.username = '"+username+"'", null);
+        while(c.moveToNext()) {
+            price = c.getDouble(0);
+            break;
+        }
+        return price;
+    }
+    
+    public String getOrderRestaurant(String username) {
+        String restaurant = "";
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("select r.name from orders as o join users as u join restaurants as r on u.id = o.user_id and r.id = o.rest_id where u.username = '"+username+"'", null);
+        while(c.moveToNext()) {
+            restaurant = c.getString(0);
+            break;
+        }
+        return restaurant;
+    }
+
     public void createOrder(String id, String restaurant, String username, String food, Float price) {
         SQLiteDatabase db = getWritableDatabase();
         // Mirar que el producto que se quiere comprar no está ya seleccionado

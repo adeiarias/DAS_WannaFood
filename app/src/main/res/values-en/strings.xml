@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">DAS_WannaFood</string>
-    <string name="main_title">WannaFood</string>
+    <string name="app_name">Wanna Food</string>
+    <string name="main_title">Wanna Food</string>
     <string name="login_text">LogIn</string>
     <string name="btn_login">Login</string>
     <string name="btn_register_login">SignUp</string>
@@ -41,4 +41,11 @@
     <string name="deleteOrder">This order has been deleted</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="finishOrder">Finish Order</string>
+    <string name="finishOrderMessage">Do you want to finish the current order?</string>
+    <string name="notifTitle">Order finished</string>
+    <string name="notifContent1">The following order has been done: Restaurant: </string>
+    <string name="notifContent2">Total price: </string>
+    <string name="notifContent3">Date: </string>
+    <string name="notifSub">Thanks for using the app!</string>
 </resources>

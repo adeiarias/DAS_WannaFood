@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">DAS_WannaFood</string>
-    <string name="main_title">WannaFood</string>
+    <string name="app_name">Wanna Food</string>
+    <string name="main_title">Wanna Food</string>
     <string name="login_text">LogIn</string>
     <string name="btn_login">Login</string>
     <string name="btn_register_login">Registrar</string>
@@ -30,15 +30,22 @@
     <string name="btn_prefs">Preferencias</string>
     <string name="view_order_food_btn">Mirar orden</string>
     <string name="without_food">Este restaurante no parece tener comida, elige otro</string>
-    <string name="warning">ATENCIÓN!!!</string>
+    <string name="warning">¡¡¡ATENCIÓN!!!</string>
     <string name="pedingOrder">Existe una orden pediente:</string>
     <string name="noOrder">No existe una orden pendiente</string>
-    <string name="addedToOrder">añadido a la orden!</string>
-    <string name="cancelPedidoMessage">Por favor, cancela o termina esa orden primero!</string>
+    <string name="addedToOrder">¡añadido a la orden!</string>
+    <string name="cancelPedidoMessage">¡Por favor, cancela o termina esa orden primero!</string>
     <string name="basket">Mostrar el carrito de la compra</string>
     <string name="logout_menu">Cerrar sesión de la aplicación</string>
     <string name="preferences">Modificar las preferencias de la aplicación</string>
     <string name="deleteOrder">Esta orden se ha borrado</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="finishOrder">Terminar Orden</string>
+    <string name="finishOrderMessage">¿Quieres terminar la orden actual?</string>
+    <string name="notifTitle">Orden terminada</string>
+    <string name="notifContent1">Se ha realizado la siguiente orden. Restaurante: </string>
+    <string name="notifContent2">Precio total: </string>
+    <string name="notifContent3">Fecha: </string>
+    <string name="notifSub">¡Gracias por usar la aplicación!</string>
 </resources>

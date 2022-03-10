@@ -19,8 +19,8 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentLandscape"
         android:name="com.example.das_wannafood.fragments.PlaceOrderFragment"
-        android:layout_width="357dp"
-        android:layout_height="353dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarPrincipal"
@@ -29,8 +29,8 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/order_fragment_horiz"
         android:name="com.example.das_wannafood.fragments.Food_order_fragment_horizontal"
-        android:layout_width="373dp"
-        android:layout_height="354dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

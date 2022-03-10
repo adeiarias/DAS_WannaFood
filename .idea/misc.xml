@@ -9,6 +9,7 @@
         <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/layout-land/fila_lista_restaurante.xml" value="0.1728395061728395" />
         <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/layout-land/food_cardview.xml" value="0.1728395061728395" />
         <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/layout-land/food_order.xml" value="0.28541666666666665" />
+        <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/layout-land/fragment_food_order_horizontal.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/layout-land/login_page.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/layout-land/main_page.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/layout-land/place_order.xml" value="0.33" />
@@ -26,13 +27,14 @@
         <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/layout/fragment_food_order_horizontal.xml" value="0.18070652173913043" />
         <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/layout/login_page.xml" value="0.33" />
         <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/layout/main_page.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/layout/place_order.xml" value="0.1" />
+        <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/layout/place_order.xml" value="0.25" />
         <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/layout/place_order_fragment.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/layout/previous_orders.xml" value="0.21" />
         <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/layout/register_page.xml" value="0.28125" />
         <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/layout/toolbar.xml" value="0.21" />
         <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/layout/view_orders.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/menu/menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Adei/AndroidStudioProjects/DAS_WannaFood/app/src/main/res/xml/conf_preferencias.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
