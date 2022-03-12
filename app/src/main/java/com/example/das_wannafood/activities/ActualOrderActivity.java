@@ -3,12 +3,14 @@ package com.example.das_wannafood.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Build;
@@ -26,6 +28,7 @@ import com.example.das_wannafood.models.Order;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class ActualOrderActivity extends AppCompatActivity implements ActualOrder_fragment.ActualOrderListener, DialogoTerminarPedido.ListenerDialogTerminar {
 
@@ -36,6 +39,20 @@ public class ActualOrderActivity extends AppCompatActivity implements ActualOrde
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Acceder a las preferencias para conseguir el valor de la clave del idioma
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String idioma = prefs.getString("idioma", "es");
+
+        // Cambiar el idioma
+        Locale nuevaloc = new Locale(idioma);
+        Locale.setDefault(nuevaloc);
+        Configuration configuration = getBaseContext().getResources().getConfiguration();
+        configuration.setLocale(nuevaloc);
+        configuration.setLayoutDirection(nuevaloc);
+        Context context = getBaseContext().createConfigurationContext(configuration);
+        getBaseContext().getResources().updateConfiguration(configuration, context.getResources().getDisplayMetrics());
+
         setContentView(R.layout.actual_order);
         db = new MiDB(this, "App", null ,1);
         username = getIntent().getExtras().getString("username");

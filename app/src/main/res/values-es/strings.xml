@@ -48,4 +48,14 @@
     <string name="notifContent2">Precio total: </string>
     <string name="notifContent3">Fecha: </string>
     <string name="notifSub">¡Gracias por usar la aplicación!</string>
+    <string name="selecIdoma">Selecciona tu idioma favorito</string>
+    <string name="selecIdiomaSummary">¿Qué idioma deseas elegir?</string>
+    <string name="selecIdiomaTitle">Idiomas</string>
+    <string name="userPrefs">Preferencias de usuario</string>
+    <string name="spanish">Castellano</string>
+    <string name="basque">Euskera</string>
+    <string name="english">Inglés</string>
+    <string name="input_city">Escribe el nombre de una ciudad</string>
+    <string name="username">usuario</string>
+    <string name="password">contraseña</string>
 </resources>

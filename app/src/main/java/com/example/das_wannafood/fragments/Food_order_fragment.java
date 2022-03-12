@@ -87,7 +87,7 @@ public class Food_order_fragment extends Fragment implements ElViewHolder.onFood
     }
 
     public void searchFood() {
-        lista = db.getFoodFromRestaurant(restaurant_name.getText().toString());
+        lista = db.getFoodFromRestaurant(restaurant_name.getText().toString(), city);
         if (lista.size() != 0) {
             String[][] arrayRestaurantes = getFoodDataInArray(lista);
             eladaptador = new AdapterRecycler(getImageIds(arrayRestaurantes[0]),arrayRestaurantes[1],arrayRestaurantes[2], this);

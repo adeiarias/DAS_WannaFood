@@ -2,8 +2,11 @@ package com.example.das_wannafood.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,6 +18,8 @@ import com.example.das_wannafood.fragments.Food_order_fragment;
 import com.example.das_wannafood.fragments.Food_order_fragment_horizontal;
 import com.example.das_wannafood.fragments.PlaceOrderFragment;
 
+import java.util.Locale;
+
 public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderFragment.PlaceOrderListenerFragment, Food_order_fragment_horizontal.FoodListenerFragmentHorizontal, DialogoPedidoPendiente.ListenerdelDialogo {
 
     private PlaceOrderFragment placeOrderFragment; // Fragment para elegir restaurante
@@ -25,6 +30,22 @@ public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderF
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Acceder a las preferencias para conseguir el valor de la clave del idioma
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String idioma = prefs.getString("idioma", "es");
+        System.out.println(idioma);
+
+        // Cambiar el idioma
+        Locale nuevaloc = new Locale(idioma);
+        Locale.setDefault(nuevaloc);
+        Configuration configuration = getBaseContext().getResources().getConfiguration();
+        configuration.setLocale(nuevaloc);
+        configuration.setLayoutDirection(nuevaloc);
+
+        Context context = getBaseContext().createConfigurationContext(configuration);
+        getBaseContext().getResources().updateConfiguration(configuration, context.getResources().getDisplayMetrics());
+
         setContentView(R.layout.place_order);
 
         username = getIntent().getExtras().getString("username");
@@ -76,9 +97,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderF
             startActivity(intent);
 
         } else if (id == R.id.preferences) { // Si se ha pulsado preferencias, se podrán gestionar las preferencias de la app
-            /*Intent i = new Intent (this, VerMasTardeActivity.class);
-            i.putExtra("usuario", usuario);
-            startActivity(i);*/
+            Intent i = new Intent (this, GestionPreferencias.class);
+            startActivity(i);
 
         } else if (id == R.id.logout) { // Si se ha pulsado logout, se volverá a la pantalla del login
             Intent intent = new Intent(this, LoginActivity.class);

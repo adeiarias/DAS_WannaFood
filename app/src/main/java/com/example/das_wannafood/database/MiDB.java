@@ -14,44 +14,41 @@ import com.example.das_wannafood.models.Order;
 import com.example.das_wannafood.models.Restaurant;
 import com.example.das_wannafood.models.User;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import com.example.das_wannafood.R;
 
 public class MiDB extends SQLiteOpenHelper {
 
+    private InputStream fichero;
+
     public MiDB(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
+        fichero = context.getResources().openRawResource(R.raw.db_init);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        // select r.id,f.name, res.name from restfood as r join food as f join restaurants res on r.id = f.id and r.id = res.id;
-        // Creación de la tabla de los usuarios
-        sqLiteDatabase.execSQL("create table users('id' integer primary key autoincrement not null, 'username' varchar(255) not null, 'email' varchar(255) not null, 'password' varchar(255) not null)");
-        sqLiteDatabase.execSQL("create table restaurants('id' integer primary key autoincrement not null, 'name' varchar(255) not null, 'image_path' varchar(255) not null, 'city' varchar(255) not null)");
-        sqLiteDatabase.execSQL("create table food('id' integer primary key autoincrement not null, 'name' varchar(255) not null, 'image_path' varchar(255) not null, 'price' real not null)");
-        sqLiteDatabase.execSQL("create table restfood('id' integer primary key autoincrement not null, 'rest_id' integer not null, 'food_id' integer not null, foreign key(\"rest_id\") references restaurants(id), foreign key(\"food_id\") references food(id))");
-        sqLiteDatabase.execSQL("create table orders('id' integer not null, 'user_id' integer not null, 'rest_id' integer not null, 'food_id' integer not null, 'price' real not null, foreign key(rest_id) references restaurants(id), foreign key(food_id) references food(id), foreign key(user_id) references users(id), primary key(id, rest_id, food_id, user_id))");
+        // Creación de la la base de datos
+        readDatabaseFile(sqLiteDatabase);
+    }
 
-        sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Tagliatella\", \"tagliatella\", \"bilbao\")");
-        sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Burger King\", \"burger\", \"bilbao\")");
-        sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Tagliatella\", \"tagliatella\", \"barcelona\")");
-        sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Burger King\", \"burger\", \"madrid\")");
-        sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Tagliatella\", \"tagliatella\", \"madrid\")");
-        sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Burger King\", \"burger\", \"sevilla\")");
-        sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Tagliatella\", \"tagliatella\", \"sevilla\")");
-        sqLiteDatabase.execSQL("insert into restaurants(\"name\", \"image_path\", \"city\") values(\"Burger King\", \"burger\", \"valencia\")");
-
-        sqLiteDatabase.execSQL("insert into food(\"name\", \"image_path\", \"price\") values(\"Pizza\", \"pizza\", 8.99)");
-        sqLiteDatabase.execSQL("insert into food(\"name\", \"image_path\", \"price\") values(\"Patatas\", \"patatas\", 2.99)");
-        sqLiteDatabase.execSQL("insert into food(\"name\", \"image_path\", \"price\") values(\"Tarta\", \"tarta\", 3.99)");
-
-        sqLiteDatabase.execSQL("insert into restfood(\"rest_id\", \"food_id\") values(1,1)");
-        sqLiteDatabase.execSQL("insert into restfood(\"rest_id\", \"food_id\") values(1,3)");
-        sqLiteDatabase.execSQL("insert into restfood(\"rest_id\", \"food_id\") values(2,2)");
-        sqLiteDatabase.execSQL("insert into restfood(\"rest_id\", \"food_id\") values(2,3)");
-
-        sqLiteDatabase.execSQL("insert into orders values(\"1\",\"1\",\"1\",\"1\",5.5)");
+    private void readDatabaseFile(SQLiteDatabase sqLiteDatabase) {
+        InputStream fich = fichero;
+        BufferedReader buff = new BufferedReader(new InputStreamReader(fich));
+        try {
+            String line;
+            while ((line = buff.readLine()) != null) {
+                sqLiteDatabase.execSQL(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -100,10 +97,10 @@ public class MiDB extends SQLiteOpenHelper {
         return list;
     }
 
-    public ArrayList<Food> getFoodFromRestaurant(String restaurant_name) {
+    public ArrayList<Food> getFoodFromRestaurant(String restaurant_name, String city) {
         ArrayList<Food> list = new ArrayList<Food>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("Select f.name, f.image_path, f.price from restfood as r join food as f join restaurants as res on r.food_id=f.id and r.rest_id=res.id where res.name='"+restaurant_name+"'", null);
+        Cursor c = db.rawQuery("Select f.name, f.image_path, f.price from restfood as r join food as f join restaurants as res on r.food_id=f.id and r.rest_id=res.id where res.name='"+restaurant_name+"' and res.city='"+city+"'", null);
         while(c.moveToNext()) {
             list.add(new Food(c.getString(0), c.getString(1), c.getFloat(2)));
         }
