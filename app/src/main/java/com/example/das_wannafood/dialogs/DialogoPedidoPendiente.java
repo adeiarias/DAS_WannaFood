@@ -18,12 +18,6 @@ public class DialogoPedidoPendiente extends DialogFragment {
     private String restaurant;
     private String city;
 
-    ListenerdelDialogo miListener;
-
-    public interface ListenerdelDialogo {
-        void pedidoPendiente();
-    }
-
     public DialogoPedidoPendiente(String pRest, String pCity) {
         this.restaurant = pRest;
         this.city = pCity;
@@ -33,15 +27,13 @@ public class DialogoPedidoPendiente extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
-        miListener = (ListenerdelDialogo) getActivity();
         builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(getString(R.string.warning));
         builder.setMessage(getString(R.string.pedingOrder) + " \nRestaurant: " + this.restaurant + " \nCity: " + this.city + "\n" + getString(R.string.cancelPedidoMessage));
         builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // Llamar al metodo pedidoPendiente del listener de la actividad
-                miListener.pedidoPendiente();
+                // No se va a hacer nada
             }
         });
         return builder.create();

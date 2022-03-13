@@ -15,7 +15,7 @@ import com.example.das_wannafood.fragments.Food_order_fragment;
 
 import java.util.Locale;
 
-public class OrderCreatorActivity extends AppCompatActivity implements Food_order_fragment.FoodListenerFragment, DialogoPedidoPendiente.ListenerdelDialogo{
+public class OrderCreatorActivity extends AppCompatActivity implements Food_order_fragment.FoodListenerFragment {
 
     private Food_order_fragment food_order_fragment;
 
@@ -45,20 +45,7 @@ public class OrderCreatorActivity extends AppCompatActivity implements Food_orde
         if(orientacion == Configuration.ORIENTATION_PORTRAIT) {
             food_order_fragment = (Food_order_fragment) getSupportFragmentManager().findFragmentById(R.id.fragment_order_verti);
         } else {
-            food_order_fragment = (Food_order_fragment) getSupportFragmentManager().findFragmentById(R.id.order_fragment_horiz);
+            food_order_fragment = (Food_order_fragment) getSupportFragmentManager().findFragmentById(R.id.fragment_order_horiz);
         }
-    }
-
-    @Override
-    public void hayPedidoPediente(String username) {
-        Intent intent = new Intent(this, PlaceOrderActivity.class);
-        intent.putExtra("username", username);
-        startActivity(intent);
-        finish();
-    }
-
-    @Override
-    public void pedidoPendiente() {
-        food_order_fragment.pedidoPendiente();
     }
 }

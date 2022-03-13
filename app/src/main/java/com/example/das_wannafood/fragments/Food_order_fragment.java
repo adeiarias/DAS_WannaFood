@@ -39,7 +39,6 @@ public class Food_order_fragment extends Fragment implements ElViewHolder.onFood
     private FoodListenerFragment listener;
 
     public interface FoodListenerFragment {
-        void hayPedidoPediente(String username);
     }
 
     // Une el listener con los métodos implementados en la actividad
@@ -74,7 +73,7 @@ public class Food_order_fragment extends Fragment implements ElViewHolder.onFood
 
     // Este método nos permitirá poder inicializar la tabla tanto cuando se inicialice la clase con un intent
     // como cuando se inicialice con el fragment
-    private void initializeTable(String pusername, String prestaurant, String pcity) {
+    public void initializeTable(String pusername, String prestaurant, String pcity) {
         restaurant_name = (TextView) getView().findViewById(R.id.restaurant_order);
         username = pusername;
         city = pcity;
@@ -142,9 +141,5 @@ public class Food_order_fragment extends Fragment implements ElViewHolder.onFood
             DialogFragment dialogFragment = new DialogoPedidoPendiente(lista.get(1), lista.get(2));
             dialogFragment.show(getActivity().getSupportFragmentManager(), "pedido existente");
         }
-    }
-
-    public void pedidoPendiente() {
-        listener.hayPedidoPediente(username);
     }
 }

@@ -5,17 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentPortrait"
-        android:name="com.example.das_wannafood.fragments.PlaceOrderFragment"
-        android:layout_width="408dp"
-        android:layout_height="670dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarPrincipal" />
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarPrincipal"
         android:layout_width="match_parent"
@@ -26,4 +15,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarPrincipal">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentPortrait"
+            android:name="com.example.das_wannafood.fragments.PlaceOrderFragment"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

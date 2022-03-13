@@ -16,25 +16,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentLandscape"
-        android:name="com.example.das_wannafood.fragments.PlaceOrderFragment"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarPrincipal"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/order_fragment_horiz"
-        android:name="com.example.das_wannafood.fragments.Food_order_fragment_horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fragmentLandscape"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarPrincipal" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarPrincipal">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentLandscape"
+            android:name="com.example.das_wannafood.fragments.PlaceOrderFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/order_fragment_horiz"
+            android:name="com.example.das_wannafood.fragments.Food_order_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
