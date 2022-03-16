@@ -18,7 +18,7 @@ insert into restaurants("name", "image_path", "city") values("Tagliatella", "tag
 insert into restaurants("name", "image_path", "city") values("KFC", "kfc", "sevilla")
 insert into food("name", "image_path", "price") values("Pizza", "pizza", 8.99)
 insert into food("name", "image_path", "price") values("Patatas Fritas", "patatas", 2.99)
-insert into food("name", "image_path", "price") values("Tarta de chocolate", "tarta", 3.99)
+insert into food("name", "image_path", "price") values("Croccantino", "tarta", 3.99)
 insert into food("name", "image_path", "price") values("Pasta", "pasta", 9.99)
 insert into food("name", "image_path", "price") values("KFC Pollo", "kfc_pollo1", 8.99)
 insert into food("name", "image_path", "price") values("Menú KFC", "menu_kfc", 25.99)

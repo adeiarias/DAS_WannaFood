@@ -101,9 +101,12 @@ public class MiDB extends SQLiteOpenHelper {
         ArrayList<Food> list = new ArrayList<Food>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery("Select f.name, f.image_path, f.price from restfood as r join food as f join restaurants as res on r.food_id=f.id and r.rest_id=res.id where res.name='"+restaurant_name+"' and res.city='"+city+"'", null);
-        while(c.moveToNext()) {
-            list.add(new Food(c.getString(0), c.getString(1), c.getFloat(2)));
+        if(c.getCount() != 0) {
+            while(c.moveToNext()) {
+                list.add(new Food(c.getString(0), c.getString(1), c.getFloat(2)));
+            }
         }
+        System.out.println("LENGHTTHHTH:" + list.size());
         return list;
     }
 

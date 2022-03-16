@@ -10,4 +10,16 @@
         <item>eu</item>
         <item>en</item>
     </string-array>
+    <string-array name="restaurantes">
+        <item>Tagliatella</item>
+        <item>Burger King</item>
+        <item>Telepizza</item>
+        <item>KFC</item>
+    </string-array>
+    <string-array name="restaurante_url">
+        <item>https://www.latagliatella.es/</item>
+        <item>https://www.burgerking.es/home</item>
+        <item>https://www.telepizza.es/</item>
+        <item>https://www.kfc.es/</item>
+    </string-array>
 </resources>

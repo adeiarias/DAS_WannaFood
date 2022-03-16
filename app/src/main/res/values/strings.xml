@@ -58,4 +58,7 @@
     <string name="input_city">Insert a city name</string>
     <string name="username">username</string>
     <string name="password">password</string>
+    <string name="selecURL">Select a restaurant to access its website</string>
+    <string name="selecURLSummary">What restaurant do you want to select?</string>
+    <string name="SelectRestTitle">Restaurants URLs</string>
 </resources>

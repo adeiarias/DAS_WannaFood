@@ -15,7 +15,7 @@ import com.example.das_wannafood.fragments.Food_order_fragment;
 
 import java.util.Locale;
 
-public class OrderCreatorActivity extends AppCompatActivity implements Food_order_fragment.FoodListenerFragment {
+public class OrderCreatorActivity extends AppCompatActivity {
 
     private Food_order_fragment food_order_fragment;
 

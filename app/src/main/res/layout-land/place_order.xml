@@ -35,7 +35,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/order_fragment_horiz"
-            android:name="com.example.das_wannafood.fragments.Food_order_fragment"
+            android:name="com.example.das_wannafood.fragments.Food_Place_Order_Fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />

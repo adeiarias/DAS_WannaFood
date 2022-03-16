@@ -107,13 +107,7 @@ public class PlaceOrderFragment extends Fragment {
     }
 
     private void createOrder(int i) {
-        listener.seleccionarRestaurantes(username, lista.get(i).getName(), cityName.getText().toString());
-    }
-
-    // Este método nos devolverá el número de elementos que hay en el listVIew
-    public int getListViewItemCount() {
-        System.out.println(cityName.getText().toString());
-        return list_rest.getAdapter().getCount();
+        listener.seleccionarRestaurantes(username, lista.get(i).getName(), cityName.getText().toString().toLowerCase());
     }
 
     private String[][] getRestaurantDataInArray(ArrayList<Restaurant> l) {
@@ -142,6 +136,4 @@ public class PlaceOrderFragment extends Fragment {
     public void setEditTextString(String text) {
         cityName.setText(text);
     }
-
-
 }

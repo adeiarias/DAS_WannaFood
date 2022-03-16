@@ -11,6 +11,13 @@
             android:key="idioma"
             android:summary="@string/selecIdiomaSummary"
             android:title="@string/selecIdiomaTitle" />
+        <ListPreference
+            android:dialogTitle="@string/selecURL"
+            android:entries="@array/restaurantes"
+            android:entryValues="@array/restaurante_url"
+            android:key="urls"
+            android:summary="@string/selecURLSummary"
+            android:title="@string/SelectRestTitle" />
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -1,8 +1,10 @@
 package com.example.das_wannafood.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,13 +18,14 @@ import java.util.Locale;
 public class GestionPreferencias extends AppCompatActivity implements Preferencias.ListenerPreferencias {
 
     private Preferencias preferencias;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
 
         // Acceder a las preferencias para conseguir el valor de la clave del idioma
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String idioma = prefs.getString("idioma", "es");
 
         // Cambiar el idioma
@@ -46,4 +49,13 @@ public class GestionPreferencias extends AppCompatActivity implements Preferenci
         finish();
         startActivity(getIntent());
     }
+
+    @Override
+    public void accederURL() {
+        Intent intentInfo = new Intent(Intent.ACTION_VIEW, Uri.parse(prefs.getString("urls", null)));
+        startActivity(intentInfo);
+    }
+
+    // Método para usar un intent implícito para acceder a la página web de un restaurante
+
 }

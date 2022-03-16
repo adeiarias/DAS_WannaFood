@@ -13,15 +13,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.das_wannafood.R;
+import com.example.das_wannafood.fragments.Food_Place_Order_Fragment;
 import com.example.das_wannafood.fragments.Food_order_fragment;
 import com.example.das_wannafood.fragments.PlaceOrderFragment;
 
 import java.util.Locale;
 
-public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderFragment.PlaceOrderListenerFragment, Food_order_fragment.FoodListenerFragment {
+public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderFragment.PlaceOrderListenerFragment {
 
     private PlaceOrderFragment placeOrderFragment; // Fragment para elegir restaurante
-    private Food_order_fragment food_order_fragment;
+    private Food_Place_Order_Fragment food_place_order_fragment;
     private String username;
 
     @Override
@@ -55,7 +56,6 @@ public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderF
         if(orientacion == Configuration.ORIENTATION_PORTRAIT) {
             placeOrderFragment = (PlaceOrderFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentPortrait);
         } else {
-            food_order_fragment = (Food_order_fragment) getSupportFragmentManager().findFragmentById(R.id.fragment_order_verti);
             placeOrderFragment = (PlaceOrderFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentLandscape);
         }
     }
@@ -65,7 +65,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderF
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE){
             // Si la orientación es landscape, se obtiene el fragment de food_order
-            food_order_fragment.initializeTable(username, restaurant, city);
+            food_place_order_fragment = (Food_Place_Order_Fragment) getSupportFragmentManager().findFragmentById(R.id.order_fragment_horiz);
+            food_place_order_fragment.initializeTable(username, restaurant, city);
         }
         else {
             // Mirar si es landscape or potrait
@@ -111,7 +112,6 @@ public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderF
         super.onSaveInstanceState(outState);
         // Se va a guardar el texto que se haya introduccido en el editText del fragment de placeOrder
         outState.putString("cityName", placeOrderFragment.getEditTextString());
-        //outState.putInt("count", placeOrderFragment.getListViewItemCount()); // Conseguir el número de elementos que hay en el listview
     }
 
     @Override
@@ -121,11 +121,8 @@ public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderF
         if(savedInstanceState != null) {
             String cityName = savedInstanceState.getString("cityName");
             if(!cityName.isEmpty()) {
-                //int listViewCount = savedInstanceState.getInt("count");
-                //if(listViewCount != 0) { // Si no hay elementos en el listview no se hará la petición a la base de datos
                 placeOrderFragment.setEditTextString(cityName);
                 placeOrderFragment.searchEvent(cityName);
-                //}
             }
         }
     }

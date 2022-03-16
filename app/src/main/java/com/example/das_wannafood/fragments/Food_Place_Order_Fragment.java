@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,11 +24,10 @@ import com.example.das_wannafood.models.Food;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Food_order_fragment extends Fragment implements ElViewHolder.onFoodListener {
+public class Food_Place_Order_Fragment extends Fragment implements ElViewHolder.onFoodListener {
 
     private TextView restaurant_name;
     private RecyclerView recycler;
-    private Button btn_order;
     private MiDB db;
     private ArrayList<Food> lista; //lista en la que se almacenará la comida del restaurante
     private AdapterRecycler eladaptador;
@@ -46,25 +44,16 @@ public class Food_order_fragment extends Fragment implements ElViewHolder.onFood
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        Bundle extra_values = getActivity().getIntent().getExtras();
-        username = extra_values.getString("username");
-        city = extra_values.getString("city");
-
-        String restaurant = extra_values.getString("restaurant");
-        initializeTable(username, restaurant, city);
+        restaurant_name = (TextView) getView().findViewById(R.id.restaurant_order);
+        recycler = getView().findViewById(R.id.recycle_food);
+        db = new MiDB(getActivity(), "App", null ,1);
     }
 
-    // Este método nos permitirá poder inicializar la tabla tanto cuando se inicialice la clase con un intent
-    // como cuando se inicialice con el fragment
+    // Para inicializar la comida de cada restaurante
     public void initializeTable(String pusername, String prestaurant, String pcity) {
-        restaurant_name = (TextView) getView().findViewById(R.id.restaurant_order);
         username = pusername;
         city = pcity;
         restaurant_name.setText(prestaurant);
-        recycler = getView().findViewById(R.id.recycle_food);
-        db = new MiDB(getActivity(), "App", null ,1);
-
         searchFood();
     }
 

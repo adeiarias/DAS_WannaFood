@@ -1,6 +1,8 @@
 package com.example.das_wannafood.fragments;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -18,6 +20,7 @@ public class Preferencias extends PreferenceFragmentCompat implements SharedPref
 
     public interface ListenerPreferencias {
         void cambiarIdioma();
+        void accederURL();
     }
 
     // Cuando se crean las preferencias, se ejecutará este método
@@ -33,6 +36,9 @@ public class Preferencias extends PreferenceFragmentCompat implements SharedPref
         // Cuando se cambie el idioma se ejecutará el método en la otra actividad
         if("idioma".equals(s)){
             listenerPreferencias.cambiarIdioma();
+        } else if("urls".equals(s)) {
+            // Acceder a la url a través de un intent implícito
+            listenerPreferencias.accederURL();
         }
     }
 

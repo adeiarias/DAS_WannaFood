@@ -95,7 +95,7 @@ public class ActualOrder_fragment extends Fragment implements ElViewHolder.onFoo
             recycler.setAdapter(eladaptador);
             GridLayoutManager elLayoutRejillaIgual= new GridLayoutManager(getActivity(),2,GridLayoutManager.VERTICAL,false);
             recycler.setLayoutManager(elLayoutRejillaIgual);
-            total.setText(Double.toString(total_price));
+            total.setText(Double.toString(total_price) + " euros");
         }
     }
 
