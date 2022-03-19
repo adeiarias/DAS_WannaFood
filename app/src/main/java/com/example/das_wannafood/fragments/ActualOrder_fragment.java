@@ -26,7 +26,6 @@ import java.util.Iterator;
 
 public class ActualOrder_fragment extends Fragment implements ElViewHolder.onFoodListener {
 
-    private TextView total;
     private RecyclerView recycler;
     private MiDB db;
     private String username;
@@ -65,7 +64,6 @@ public class ActualOrder_fragment extends Fragment implements ElViewHolder.onFoo
         super.onActivityCreated(savedInstanceState);
         username = getActivity().getIntent().getExtras().getString("username");
         recycler = (RecyclerView) getView().findViewById(R.id.recycler_actual_order);
-        total = getView().findViewById(R.id.total_actual_order);
         db = new MiDB(getActivity(), "App", null, 1);
         setOrderInformation();
     }
@@ -78,14 +76,12 @@ public class ActualOrder_fragment extends Fragment implements ElViewHolder.onFoo
         } else {
             Iterator<Order> itr = list.iterator();
             Order order = null;
-            Double total_price = 0.0;
             String[] array_nombre_comida = new String[list.size()];
             int[] array_imagen_comida = new int[list.size()];
             String[] precios_comida = new String[list.size()];
             int i = 0;
             while (itr.hasNext()) {
                 order = itr.next();
-                total_price += order.getPrice();
                 array_nombre_comida[i] = order.getFood();
                 array_imagen_comida[i] = imageNameToInt(order.getPath());
                 precios_comida[i] = Double.toString(order.getPrice());
@@ -95,7 +91,6 @@ public class ActualOrder_fragment extends Fragment implements ElViewHolder.onFoo
             recycler.setAdapter(eladaptador);
             GridLayoutManager elLayoutRejillaIgual= new GridLayoutManager(getActivity(),2,GridLayoutManager.VERTICAL,false);
             recycler.setLayoutManager(elLayoutRejillaIgual);
-            total.setText(Double.toString(total_price) + " euros");
         }
     }
 

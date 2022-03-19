@@ -35,6 +35,8 @@ public class ActualOrderActivity extends AppCompatActivity implements ActualOrde
     private MiDB db;
     private ActualOrder_fragment actualOrder_fragment;
     String username;
+    private Double total_price = 0.0;
+    private TextView price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +58,17 @@ public class ActualOrderActivity extends AppCompatActivity implements ActualOrde
         setContentView(R.layout.actual_order);
         db = new MiDB(this, "App", null ,1);
         username = getIntent().getExtras().getString("username");
-
+        total_price = db.getTotalOrderPrice(username);
+        System.out.println("Total Price: " + total_price);
         // Inicializar el fragment en función de su orientación
         int orientacion = getResources().getConfiguration().orientation;
         if(orientacion == Configuration.ORIENTATION_PORTRAIT) {
+            price = findViewById(R.id.price_port);
+            price.setText(price.getText().toString() + " " + total_price.toString() + " euros");
             actualOrder_fragment = (ActualOrder_fragment) getSupportFragmentManager().findFragmentById(R.id.fragemtActualPort);
         } else {
+            price = findViewById(R.id.price_lands);
+            price.setText(price.getText().toString() + " " + total_price.toString() + " euros");
             actualOrder_fragment = (ActualOrder_fragment) getSupportFragmentManager().findFragmentById(R.id.fragemtActualLand);
         }
     }
