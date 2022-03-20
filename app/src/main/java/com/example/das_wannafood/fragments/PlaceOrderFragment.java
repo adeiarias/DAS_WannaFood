@@ -91,6 +91,7 @@ public class PlaceOrderFragment extends Fragment {
         });
     }
 
+    // buscar los restaurantes que existen en una ciudad, para ello se mira el texto del EditText
     public void searchEvent(String cityName) {
         if(cityName.isEmpty()) {
             Toast.makeText(getActivity(), getString(R.string.camposVacios), Toast.LENGTH_SHORT).show();
@@ -106,10 +107,16 @@ public class PlaceOrderFragment extends Fragment {
         }
     }
 
+    // Este método llamará al método seleccionarRestaurantes
+    // La clase placeOrderActivity hereda este método
     private void createOrder(int i) {
         listener.seleccionarRestaurantes(username, lista.get(i).getName(), cityName.getText().toString().toLowerCase());
     }
 
+    // Tenemos una lista de restaurantes, donde cada restaurante tiene un nombre y el nombre de su imagen.
+    // El problema es que el Adapter necesita un arrayList de cada elemento a mostrar, por lo que tenemos
+    // que conseguir dos arraylists (uno para el nombre del restaurante y otro para el nombre de las imagenes)
+    // para ello se usa este método
     private String[][] getRestaurantDataInArray(ArrayList<Restaurant> l) {
         Iterator<Restaurant> iter = l.iterator();
         Restaurant rest;

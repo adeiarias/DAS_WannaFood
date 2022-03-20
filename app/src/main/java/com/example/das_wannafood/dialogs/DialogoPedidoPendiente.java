@@ -23,6 +23,7 @@ public class DialogoPedidoPendiente extends DialogFragment {
         this.city = pCity;
     }
 
+    // Inicializar el diálogo
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {

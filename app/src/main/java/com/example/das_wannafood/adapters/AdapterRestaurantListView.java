@@ -49,7 +49,6 @@ public class AdapterRestaurantListView extends BaseAdapter {
         // Añadirlos a la lista
         // Conseguir el drawable
         int resourceId = contexto.getResources().getIdentifier(imagenes[i], "drawable", contexto.getPackageName());
-        System.out.println(imagenes[i]);
         img.setImageResource(resourceId);
         nombre.setText(nombres[i]);
 

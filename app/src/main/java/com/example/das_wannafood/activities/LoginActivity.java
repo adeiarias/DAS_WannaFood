@@ -52,11 +52,13 @@ public class LoginActivity extends AppCompatActivity {
         pass_text = findViewById(R.id.passwd_login);
         logo = findViewById(R.id.imageView);
 
+        // Añadir el logo de la aplicación al inicio
         logo.setImageResource(getApplicationContext().getResources().getIdentifier("logo", "drawable", getApplicationContext().getPackageName()));
 
         db = new MiDB(this, "App", null ,1);
     }
 
+    // En este método se verificarán las credenciales de los usuarios
     public void onLogin(View v) {
         String username = user_text.getText().toString();
         String password = pass_text.getText().toString();
@@ -83,19 +85,5 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreateAccount(View v) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("username_login", user_text.getText().toString());
-        outState.putString("password_login", pass_text.getText().toString());
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        user_text.setText(savedInstanceState.getString("username_login"));
-        pass_text.setText(savedInstanceState.getString("password_login"));
     }
 }

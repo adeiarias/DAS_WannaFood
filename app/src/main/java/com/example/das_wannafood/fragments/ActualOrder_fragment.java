@@ -36,8 +36,10 @@ public class ActualOrder_fragment extends Fragment implements ElViewHolder.onFoo
     @Override
     public void onFoodListener(int position) {
         // En este caso no se va a hacer nada, porque no se va a tratar qué hacer cuando se haga click en un producto
+        // Pero es necesario heredar el listener para inicializar el adapter
     }
 
+    // Cuando se acceda a esta actividad y no exista orden pendiente, se llamará a este método
     public interface ActualOrderListener {
         void finish_activity();
     }
@@ -68,6 +70,8 @@ public class ActualOrder_fragment extends Fragment implements ElViewHolder.onFoo
         setOrderInformation();
     }
 
+
+    // Conseguir la información de la orden actual y inicializar el recyclerview
     private void setOrderInformation() {
         ArrayList<Order> list = db.getOrder(username);
         if (list == null) {
@@ -87,13 +91,16 @@ public class ActualOrder_fragment extends Fragment implements ElViewHolder.onFoo
                 precios_comida[i] = Double.toString(order.getPrice());
                 i++;
             }
+            // crear el adapter
             eladaptador = new AdapterRecycler(array_imagen_comida, array_nombre_comida, precios_comida, this);
             recycler.setAdapter(eladaptador);
+            // se pondrá filas de dos columnas
             GridLayoutManager elLayoutRejillaIgual= new GridLayoutManager(getActivity(),2,GridLayoutManager.VERTICAL,false);
             recycler.setLayoutManager(elLayoutRejillaIgual);
         }
     }
 
+    // Como solo tenemos el nombre de la imagen, necesitamos su identificador drawable
     private int imageNameToInt(String image) {
         // Este método va a conseguir el identificador drawable de cada una de las imágenes
         return getActivity().getApplicationContext().getResources().getIdentifier(image, "drawable", getActivity().getApplicationContext().getPackageName());

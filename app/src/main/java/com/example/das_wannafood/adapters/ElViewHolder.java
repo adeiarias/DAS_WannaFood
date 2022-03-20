@@ -26,6 +26,8 @@ public class ElViewHolder extends RecyclerView.ViewHolder implements View.OnClic
         itemView.setOnClickListener(this);
     }
 
+    // Cuando se haga click en un elemento del recyclerview se llamará a este método
+    // Food_Place_order_Fragment y Food_order_fragment heredarán este método
     @Override
     public void onClick(View view) {
         onFoodListener.onFoodListener(getAdapterPosition());

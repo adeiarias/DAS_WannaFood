@@ -38,6 +38,10 @@ public class MiDB extends SQLiteOpenHelper {
         readDatabaseFile(sqLiteDatabase);
     }
 
+    // Como hay varias tablas en la base de datos y cada tabla tiene muchas instancias desde el inicio,
+    // Se ha decidido cargar la base de datos desde el fichero 'db_init.txt' que se encuentra en la carpeta
+    // res/raw, de esta forma se evita que hayan demasiadas sentencias sqLiteDatabase.execSQL para inicializar
+    // la base de datos
     private void readDatabaseFile(SQLiteDatabase sqLiteDatabase) {
         InputStream fich = fichero;
         BufferedReader buff = new BufferedReader(new InputStreamReader(fich));
@@ -97,6 +101,7 @@ public class MiDB extends SQLiteOpenHelper {
         return list;
     }
 
+    // Conseguir la comida de cada restaurante
     public ArrayList<Food> getFoodFromRestaurant(String restaurant_name, String city) {
         ArrayList<Food> list = new ArrayList<Food>();
         SQLiteDatabase db = getReadableDatabase();
@@ -106,12 +111,11 @@ public class MiDB extends SQLiteOpenHelper {
                 list.add(new Food(c.getString(0), c.getString(1), c.getFloat(2)));
             }
         }
-        System.out.println("LENGHTTHHTH:" + list.size());
         return list;
     }
 
+    // Mirar si existe una orden pendiente
     public ArrayList<String> getPendingOrder(String username, String restaurant, String city) {
-        // TO DO
         String id = "";
         String rest = "";
         String cityName="";
@@ -119,7 +123,6 @@ public class MiDB extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery("select o.id, r.name, r.city from orders as o join restaurants as r join users as u on o.rest_id = r.id and o.user_id = u.id where u.username='"+username+"'", null);
         if(c.getCount() == 0) { // No hay ninguna orden creada, por lo que se podrá crear la orden
-            System.out.println("AQUI0");
             return lista;
         } else {
             while(c.moveToNext()) {
@@ -137,6 +140,7 @@ public class MiDB extends SQLiteOpenHelper {
         return lista;
     }
 
+    // Conseguir la orden pendiente de un usuario
     public ArrayList<Order> getOrder(String username) {
         ArrayList<Order> lista = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
@@ -154,17 +158,7 @@ public class MiDB extends SQLiteOpenHelper {
         return lista;
     }
 
-    public Double getOrderPrice(String username) {
-        Double price = 0.0;
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("select sum(o.price) from orders as o join users as u on u.id = o.user_id where u.username = '"+username+"'", null);
-        while(c.moveToNext()) {
-            price = c.getDouble(0);
-            break;
-        }
-        return price;
-    }
-    
+    // Conseguir el restaurante en el cual el usuario tiene una orden pendiente
     public String getOrderRestaurant(String username) {
         String restaurant = "";
         SQLiteDatabase db = getReadableDatabase();
@@ -176,6 +170,7 @@ public class MiDB extends SQLiteOpenHelper {
         return restaurant;
     }
 
+    // Conseguir el precio total de la orden pendiente de un usuario
     public Double getTotalOrderPrice(String username) {
         Double price = 0.0;
         SQLiteDatabase db = getReadableDatabase();
@@ -187,6 +182,7 @@ public class MiDB extends SQLiteOpenHelper {
         return price;
     }
 
+    // Crear una nueva orden, anteriormente se ha comprobado que no existe ni una orden pendiente de ese usuario
     public void createOrder(String id, String restaurant, String username, String food, Float price) {
         SQLiteDatabase db = getWritableDatabase();
         // Mirar que el producto que se quiere comprar no está ya seleccionado
@@ -196,6 +192,8 @@ public class MiDB extends SQLiteOpenHelper {
         }
     }
 
+    // Borrar la orden pendiente del usuario, y anteriormente se ha comprobado que no existe ninguna orden pendiente
+    // de ese usuario
     public void deleteOrder(String username) {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("delete from orders where user_id=(select id from users where username='"+username+"')");

@@ -60,14 +60,22 @@ public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderF
         }
     }
 
+    // Este método se hereda de PlaceOrderFragment. Cuando se pulsa el botón search, se cogerá el input del
+    // textfield y se buscarán los restaurantes de esa ciudad en la base de datos
     @Override
     public void seleccionarRestaurantes(String username, String restaurant, String city) {
         int orientation = getResources().getConfiguration().orientation;
+        // Si la orientación del dispositivo es landscape, se inicializarán dos fragments, uno para mostrar
+        // lista de los restaurante de una ciudad y el otro para mostrar la comidad de un restaurante, cuando
+        // se seleccione el restaurante en la lista
         if (orientation == Configuration.ORIENTATION_LANDSCAPE){
             // Si la orientación es landscape, se obtiene el fragment de food_order
             food_place_order_fragment = (Food_Place_Order_Fragment) getSupportFragmentManager().findFragmentById(R.id.order_fragment_horiz);
             food_place_order_fragment.initializeTable(username, restaurant, city);
         }
+        // Si la orientación es portrait, solo estará el fragment que se ha inicializado al principio
+        // (el que muestra la lista de los resturantes), y cuando se haga click en un restaurante, se
+        // inicializará una nueva actividad
         else {
             // Mirar si es landscape or potrait
             Intent intent = new Intent(this, OrderCreatorActivity.class);
@@ -89,15 +97,17 @@ public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderF
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        // Acceder al carrito de la compra
         if (id == R.id.shopping) { // Si se ha pulsado shopping, se creará una actividad para mostrar el pedido actual
             Intent intent = new Intent(this, ActualOrderActivity.class);
             intent.putExtra("username", username);
             startActivity(intent);
-
+        //Acceder a la pestaña de preferencias
         } else if (id == R.id.preferences) { // Si se ha pulsado preferencias, se podrán gestionar las preferencias de la app
             Intent i = new Intent (this, GestionPreferencias.class);
             startActivity(i);
 
+        // Logout de la aplicación, volver a la actividad del login
         } else if (id == R.id.logout) { // Si se ha pulsado logout, se volverá a la pantalla del login
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -120,7 +130,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderF
         // Recuperamos el string guardado cuando se ha cambiado la orientación y se vuelven a mostrar los elementos si proceden
         if(savedInstanceState != null) {
             String cityName = savedInstanceState.getString("cityName");
-            if(!cityName.isEmpty()) {
+            if(!cityName.isEmpty()) { // Si el EditText estuviera vacio no se hace nada
                 placeOrderFragment.setEditTextString(cityName);
                 placeOrderFragment.searchEvent(cityName);
             }

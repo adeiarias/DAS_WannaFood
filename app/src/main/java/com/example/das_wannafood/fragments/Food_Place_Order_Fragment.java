@@ -34,6 +34,9 @@ public class Food_Place_Order_Fragment extends Fragment implements ElViewHolder.
     private String username;
     private String city;
 
+    // Esta clase se inicia cuando el dispositivo está en modo landscape, se muestran dos fragments
+    // en la actividad de placeOrderActivity y uno de los fragments es este
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,6 +74,10 @@ public class Food_Place_Order_Fragment extends Fragment implements ElViewHolder.
         }
     }
 
+    // Tenemos una lista de comida, donde cada comida tiene un nombre, el nombre de su imagen y el precio.
+    // El problema es que el Adapter necesita un arrayList de cada elemento a mostrar, por lo que tenemos
+    // que conseguir tres arraylists (uno para el nombre de la comida, otro para el nombre de las imagenes y
+    // otro para el precio de la comida), para ello se usa este método
     private String[][] getFoodDataInArray(ArrayList<Food> l) {
         Iterator<Food> iter = l.iterator();
         Food food;
@@ -89,6 +96,8 @@ public class Food_Place_Order_Fragment extends Fragment implements ElViewHolder.
         return arrayData;
     }
 
+    // Este método nos servirá para dado una lista de imagenes que contiene el nombre de las imágenes,
+    // conseguir el identificador drawable de cada imagen
     private int[] getImageIds(String[] images) {
         // Este método va a conseguir el identificador drawable de cada una de las imágenes
         int[] returnList = new int[images.length];
@@ -98,6 +107,8 @@ public class Food_Place_Order_Fragment extends Fragment implements ElViewHolder.
         return returnList;
     }
 
+    // Este método se hereda de la clase ViewHolder que se activará cuando se haga click en un elemento del
+    // recyclerview
     public void onFoodListener(int position) {
         Food food = lista.get(position);
         // Se le pasa el nombre de usuario y el nombre del restaurante, porque puede ser que haya dos pedidos de dos usuarios distintos

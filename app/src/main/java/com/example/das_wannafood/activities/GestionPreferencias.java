@@ -45,17 +45,16 @@ public class GestionPreferencias extends AppCompatActivity implements Preferenci
     // Método de la clase Preferencias para cmabiar el idioma
     @Override
     public void cambiarIdioma() {
-        // Cuando se detecte un cambio, se destruirá la actividad y se creará una nu    eva, de esta manera, se cambiará el idioma
+        // Cuando se detecte un cambio, se destruirá la actividad y se creará una nueva, de esta manera, se cambiará el idioma
         finish();
         startActivity(getIntent());
     }
 
+    // Cuando haya un cambio en el listpreferences de los restaurantes de preferencias, se creará un intent
+    // implícito para abrir la web del restaurante en el navegador del dispositivo
     @Override
     public void accederURL() {
         Intent intentInfo = new Intent(Intent.ACTION_VIEW, Uri.parse(prefs.getString("urls", null)));
         startActivity(intentInfo);
     }
-
-    // Método para usar un intent implícito para acceder a la página web de un restaurante
-
 }

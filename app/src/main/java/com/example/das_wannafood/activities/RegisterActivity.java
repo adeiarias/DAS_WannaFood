@@ -52,6 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
         db = new MiDB(this, "App", null ,1);
     }
 
+    // Método que se usa para crear un registro de un usuario
     public void onRegister(View v) {
         String username = user_text.getText().toString();
         String password = pass_text.getText().toString();
@@ -65,26 +66,11 @@ public class RegisterActivity extends AppCompatActivity {
             if(db.userExist(username)) {
                 Toast.makeText(this, getString(R.string.userExist), Toast.LENGTH_SHORT).show();
             } else {
+                // Si el usuario no existiera, se añade a la base de datos
                 db.insertUser(username, email, password);
                 Toast.makeText(this, getString(R.string.userCreated), Toast.LENGTH_SHORT).show();
                 finish();
             }
         }
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("username_register", user_text.getText().toString());
-        outState.putString("email_register", email_text.getText().toString());
-        outState.putString("password_register", pass_text.getText().toString());
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        user_text.setText(savedInstanceState.getString("username_register"));
-        pass_text.setText(savedInstanceState.getString("password_register"));
-        email_text.setText(savedInstanceState.getString("email_register"));
     }
 }

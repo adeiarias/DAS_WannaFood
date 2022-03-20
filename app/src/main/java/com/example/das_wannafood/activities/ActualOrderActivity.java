@@ -55,13 +55,17 @@ public class ActualOrderActivity extends AppCompatActivity implements ActualOrde
         Context context = getBaseContext().createConfigurationContext(configuration);
         getBaseContext().getResources().updateConfiguration(configuration, context.getResources().getDisplayMetrics());
 
+        // Aplicamos el layout
         setContentView(R.layout.actual_order);
+
         db = new MiDB(this, "App", null ,1);
         username = getIntent().getExtras().getString("username");
         total_price = db.getTotalOrderPrice(username);
-        System.out.println("Total Price: " + total_price);
+
         // Inicializar el fragment en función de su orientación
         int orientacion = getResources().getConfiguration().orientation;
+        // Dependiendo de la orientación del dispositivo, el identificador del textfield del precio total será diferente
+        // por esa razón, se llama al método 'findViewById' en cada orientación
         if(orientacion == Configuration.ORIENTATION_PORTRAIT) {
             price = findViewById(R.id.price_port);
             price.setText(price.getText().toString() + " " + total_price.toString() + " euros");
@@ -73,22 +77,29 @@ public class ActualOrderActivity extends AppCompatActivity implements ActualOrde
         }
     }
 
+    // Este método borrará de la base de datos los registros del pedido actual
     public void deleteOrder(View v) {
         Toast.makeText(this, getString(R.string.deleteOrder), Toast.LENGTH_SHORT).show();
         db.deleteOrder(username);
         finish();
     }
 
+    // Este método al igual que el anterior borrará todos los registros del pedido actual,
+    // pero en este caso, aparecerá un dialogo para confirmar esta acción
     public void finishOrder(View v) {
         DialogFragment dialogFragment = new DialogoTerminarPedido();
         dialogFragment.show(getSupportFragmentManager(), "terminar pedido");
     }
 
+    // Este método se usa en el fragment Actual_Order y permitirá en caso de que no haya ninguna orden
+    // que la actividad no se inicie y que automáticamente se cierre.
+    // Nota importante: Se podría mejorar
     @Override
     public void finish_activity() {
         finish();
     }
 
+    // Esta notificación se creará cuando se termine el pedido actual
     private void createOrderFinishNotif(String restaurante, Double price, String fecha) {
         NotificationManager elManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder elBuilder = new NotificationCompat.Builder(this, "IdCanal");
@@ -113,10 +124,13 @@ public class ActualOrderActivity extends AppCompatActivity implements ActualOrde
                 .setSubText(getString(R.string.notifSub))
                 .setVibrate(new long[]{0, 1000, 500 , 1000})
                 .setAutoCancel(true);
-
+        // lanzar la notificación
         elManager.notify(1, elBuilder.build());
     }
 
+    // Este método se llama desde la clase 'DialogoTerminarPedido' y permitirá por un lado mostrar la notificación,
+    // y por el otro lado, terminar la actividad con el método 'finish()'
+    // basicamente queremos que cuando se termine el pedido vuelva a la actividad anterior (en este caso, al placeOrderActivity)
     @Override
     public void terminarPedido() {
         String restaurant = db.getOrderRestaurant(username);

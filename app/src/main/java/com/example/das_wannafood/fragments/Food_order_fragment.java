@@ -36,6 +36,9 @@ public class Food_order_fragment extends Fragment implements ElViewHolder.onFood
     private String username;
     private String city;
 
+    // Esta actividad se muestra cuando el dispositivo está en modo portrait y se activa cuando
+    // el usuario en la actividad placeOrderActivity hace click en un elemento de la lista de restaurantes
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,8 +58,7 @@ public class Food_order_fragment extends Fragment implements ElViewHolder.onFood
         initializeTable(username, restaurant, city);
     }
 
-    // Este método nos permitirá poder inicializar la tabla tanto cuando se inicialice la clase con un intent
-    // como cuando se inicialice con el fragment
+    // Inicializar la tabla (recyclerview)
     public void initializeTable(String pusername, String prestaurant, String pcity) {
         restaurant_name = (TextView) getView().findViewById(R.id.restaurant_order);
         username = pusername;
@@ -68,7 +70,7 @@ public class Food_order_fragment extends Fragment implements ElViewHolder.onFood
         searchFood();
     }
 
-    // Para que aparezca la comida del restaurante
+    // Buscar la comida del restaurante que se ha pulsado en la listview
     public void searchFood() {
         lista = db.getFoodFromRestaurant(restaurant_name.getText().toString(), city);
         if (lista.size() != 0) {
@@ -82,10 +84,14 @@ public class Food_order_fragment extends Fragment implements ElViewHolder.onFood
         }
     }
 
+    // Tenemos una lista de comida, donde cada comida tiene un nombre, el nombre de su imagen y el precio.
+    // El problema es que el Adapter necesita un arrayList de cada elemento a mostrar, por lo que tenemos
+    // que conseguir tres arraylists (uno para el nombre de la comida, otro para el nombre de las imagenes y
+    // otro para el precio de la comida), para ello se usa este método
     private String[][] getFoodDataInArray(ArrayList<Food> l) {
         Iterator<Food> iter = l.iterator();
         Food food;
-        // Array de dos filas (porque en cada fila de la lista hay una imagen y un texto
+        // Array de tres filas (porque en cada fila hay una lista de nombres, nombres de imagenes y precios)
         // Y de n columnas (donde n es el número de restaurantes)
         String[][] arrayData = new String[3][l.size()];
         int i = 0; // para saber la posición del restaurante en la lista
@@ -100,6 +106,8 @@ public class Food_order_fragment extends Fragment implements ElViewHolder.onFood
         return arrayData;
     }
 
+    // Este método nos servirá para dado una lista de imagenes que contiene el nombre de las imágenes,
+    // conseguir el identificador drawable de cada imagen
     private int[] getImageIds(String[] images) {
         // Este método va a conseguir el identificador drawable de cada una de las imágenes
         int[] returnList = new int[images.length];
@@ -109,6 +117,8 @@ public class Food_order_fragment extends Fragment implements ElViewHolder.onFood
         return returnList;
     }
 
+    // Este método se hereda de la clase ViewHolder que se activará cuando se haga click en un elemento del
+    // recyclerview
     public void onFoodListener(int position) {
         Food food = lista.get(position);
         // Se le pasa el nombre de usuario y el nombre del restaurante, porque puede ser que haya dos pedidos de dos usuarios distintos

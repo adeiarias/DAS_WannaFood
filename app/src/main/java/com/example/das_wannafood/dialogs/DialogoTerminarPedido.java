@@ -23,6 +23,7 @@ public class DialogoTerminarPedido extends DialogFragment {
 
     public DialogoTerminarPedido() {}
 
+    // Inicializar el diálogo
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class DialogoTerminarPedido extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 // Cuando se haga click en el botón 'yes', se terminará la orden
+                // La clase ActualOrderActivity heredará este método y terminará el pedido actual
                 listenerDialogTerminar.terminarPedido();
             }
         });

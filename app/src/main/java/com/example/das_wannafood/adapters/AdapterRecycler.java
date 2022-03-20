@@ -31,6 +31,7 @@ public class AdapterRecycler extends RecyclerView.Adapter<ElViewHolder> {
         return evh;
     }
 
+    // Inicializar la información que se quiere mostrar
     @Override
     public void onBindViewHolder(@NonNull ElViewHolder holder, int position) {
         holder.imagen.setImageResource(imagenes[position]);
