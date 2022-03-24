@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme.Button" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">#FF00FF</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="ColorFondo">
+        <item name="android:background">#212121</item>
+    </style>
+    <style name="TextViewCambioColor" parent="ColorFondo">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="login_register_edit" parent="ColorFondo">
+        <item name="android:textColorHint">#BBBBBB</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="textview" parent="ColorFondo">
+        <item name="android:textColor">#BBBBBB</item>
+    </style>
+
+</resources>

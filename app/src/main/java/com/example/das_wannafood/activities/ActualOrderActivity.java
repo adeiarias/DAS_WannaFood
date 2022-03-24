@@ -134,7 +134,7 @@ public class ActualOrderActivity extends AppCompatActivity implements ActualOrde
     @Override
     public void terminarPedido() {
         String restaurant = db.getOrderRestaurant(username);
-        Double totalPrice = db.getOrderPrice(username);
+        Double totalPrice = db.getTotalOrderPrice(username);
         Date date = new Date(); // This object contains the current date value
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String fecha = formatter.format(date);

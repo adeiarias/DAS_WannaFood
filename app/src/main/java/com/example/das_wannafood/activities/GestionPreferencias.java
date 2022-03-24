@@ -19,10 +19,13 @@ public class GestionPreferencias extends AppCompatActivity implements Preferenci
 
     private Preferencias preferencias;
     private SharedPreferences prefs;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
+
+        username = getIntent().getExtras().getString("username");
 
         // Acceder a las preferencias para conseguir el valor de la clave del idioma
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -46,8 +49,11 @@ public class GestionPreferencias extends AppCompatActivity implements Preferenci
     @Override
     public void cambiarIdioma() {
         // Cuando se detecte un cambio, se destruirá la actividad y se creará una nueva, de esta manera, se cambiará el idioma
+        Intent intent = new Intent(this, PlaceOrderActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("username", username);
+        startActivity(intent);
         finish();
-        startActivity(getIntent());
     }
 
     // Cuando haya un cambio en el listpreferences de los restaurantes de preferencias, se creará un intent

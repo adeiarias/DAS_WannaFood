@@ -105,6 +105,7 @@ public class PlaceOrderActivity extends AppCompatActivity implements PlaceOrderF
         //Acceder a la pestaña de preferencias
         } else if (id == R.id.preferences) { // Si se ha pulsado preferencias, se podrán gestionar las preferencias de la app
             Intent i = new Intent (this, GestionPreferencias.class);
+            i.putExtra("username", username);
             startActivity(i);
 
         // Logout de la aplicación, volver a la actividad del login

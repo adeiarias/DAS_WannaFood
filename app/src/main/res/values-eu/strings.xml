@@ -6,7 +6,7 @@
     <string name="btn_register_login">Erregistratu</string>
     <string name="register_label_login">Kontu berri bat sortu</string>
     <string name="register_text">Izena eman</string>
-    <string name="btn_register">Erregistratu</string>
+    <string name="btn_register">Erregistro</string>
     <string name="welcome_text">Ongi etorri:</string>
     <string name="what_to_do">Zer egin nahi duzu?</string>
     <string name="view_order">Aurreko eskaerak ikusi</string>

@@ -28,7 +28,7 @@
         <activity
             android:name=".activities.GestionPreferencias"
             android:exported="false"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".activities.LoginActivity"
             android:exported="true"

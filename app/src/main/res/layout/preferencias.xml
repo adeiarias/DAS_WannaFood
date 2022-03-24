@@ -9,6 +9,7 @@
         android:name="com.example.das_wannafood.fragments.Preferencias"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#ED9892"
         tools:layout_editor_absoluteX="194dp"
         tools:layout_editor_absoluteY="307dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

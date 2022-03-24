@@ -2,12 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ColorFondo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.PlaceOrderActivity">
 
     <TextView
         android:id="@+id/place_order_title"
+        style="@style/textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -22,6 +24,7 @@
 
     <EditText
         android:id="@+id/cityEdit"
+        style="@style/login_register_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -38,7 +41,6 @@
         android:id="@+id/btn_search_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:text="@string/btn_city_search"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,12 +48,12 @@
 
     <ListView
         android:id="@+id/restaurant_list"
+        style="@style/ColorFondo"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="10dp"
-        android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
